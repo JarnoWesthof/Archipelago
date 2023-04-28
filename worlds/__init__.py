@@ -96,6 +96,12 @@ for file in os.scandir(folder):
         elif file.is_file() and file.name.endswith(".apworld"):
             world_sources.append(WorldSource(file.name, is_zip=True))
 
+additional_apworlds_folder = os.getenv('ADDITIONAL_APWORLD_FOLDER')
+if additional_apworlds_folder:
+    for file in additional_apworlds_folder:
+        if file.is_file() and file.name.endswith(".apworld"):
+                world_sources.append(WorldSource(file.name, is_zip=True, relative=False))
+
 # import all submodules to trigger AutoWorldRegister
 world_sources.sort()
 for world_source in world_sources:
