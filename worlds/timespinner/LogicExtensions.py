@@ -107,4 +107,4 @@ class TimespinnerLogic:
         elif era == "Time":
             return self.time_keys_unlock == gate and state.has("Mysterious Warp Beacon", self.player)
         else:
-            raise Exception("Invallid Era: {}".format(era))
+            raise Exception("Invalid Era: {}".format(era))
