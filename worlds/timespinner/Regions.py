@@ -109,7 +109,7 @@ def create_regions_and_locations(world: MultiWorld, player: int, precalculated_w
     connect(world, player, 'Military Fortress', 'Military Fortress (hangar)', logic.has_timestop)
     connect(world, player, 'Military Fortress (hangar)', 'Military Fortress')
     connect(world, player, 'Military Fortress (hangar)', 'Before the lab', lambda state: state.has('Water Mask', player) if flooded.flood_lab else (logic.has_timestop(state) or state.has('Talaria', player)))
-    connect(world, player, 'Before the lab', 'Military Fortress (hangar)', lambda state: state.has('Water Mask', player) if flooded.flood_lab else (logic.has_doublejump or logic.has_fastjump_on_npc))
+    connect(world, player, 'Before the lab', 'Military Fortress (hangar)', lambda state: state.has('Water Mask', player) if flooded.flood_lab else (logic.has_doublejump(state) or logic.has_fastjump_on_npc(state)))
     connect(world, player, 'Before the lab', 'Space time continuum', logic.has_teleport)
     connect(world, player, 'Before the lab', 'The lab', logic.has_keycard_B)
     connect(world, player, 'Temporal Gyre', 'Military Fortress')
