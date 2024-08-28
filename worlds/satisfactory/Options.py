@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, List, Any, Tuple, ClassVar, cast
 from enum import IntEnum
-from Options import PerGameCommonOptions, DeathLink, AssembleOptions
+from Options import PerGameCommonOptions, DeathLink, AssembleOptions, Visibility
 from Options import Range, Toggle, OptionList, StartInventoryPool, NamedRange, Choice
 
 class Placement(IntEnum):
@@ -45,10 +45,9 @@ class ElevatorTier(NamedRange):
     """Ship these Space Elevator packages to finish"""
     display_name = "Goal: Space Elevator shipment"
     default = 2
-    range_start = 0
+    range_start = 1
     range_end = 4
     special_range_names = {
-        "disabled": 0,
         "one package (tiers 1-2)": 1,
         "two packages (tiers 1-4)": 2,
         "three packages (tiers 1-6)": 3,
@@ -64,39 +63,42 @@ class ResourceSinkPoints(NamedRange):
 
     If you have Free Samples enabled, consider setting this higher so that you can't reach the goal just by sinking your Free Samples."""
     display_name = "Goal: AWESOME Sink points"
-    default = 0
-    range_start = 0
+    default = 2166000
+    range_start = 2166000
     range_end = 18436379500
     special_range_names = {
-        "disabled": 0,
-        "50 coupons (~2M points)": 2166000,
-        "100 coupons (~18M points)": 17804500,
-        "150 coupons (~61M points)": 60787500,
-        "200 coupons (~145M points)": 145053500,
-        "250 coupons (~284M points)": 284442000,
-        "300 coupons (~493M points)": 492825000,
-        "350 coupons (~784M points)": 784191000,
-        "400 coupons (~1,2B points)": 1172329500,
-        "450 coupons (~1,7B points)": 1671112500,
-        "500 coupons (~2B points)": 2294578500,
-        "550 coupons (~3B points)": 3056467000,
-        "600 coupons (~4B points)": 3970650000,
-        "650 coupons (~5B points)": 5051216000,
-        "700 coupons (~6B points)": 6311854500,
-        "750 coupons (~8B points)": 7766437500,
-        "800 coupons (~9B points)": 9429103500,
-        "850 coupons (~11B points)": 11313492000,
-        "900 coupons (~13B points)": 13433475000,
-        "950 coupons (~16B points)": 15803241000,
-        "1000 coupons (~18B points)": 18436379500
+        "50 coupons (~2m points)": 2166000,
+        "100 coupons (~18m points)": 17804500,
+        "150 coupons (~61m points)": 60787500,
+        "200 coupons (~145m points)": 145053500,
+        "250 coupons (~284m points)": 284442000,
+        "300 coupons (~493m points)": 492825000,
+        "350 coupons (~784m points)": 784191000,
+        "400 coupons (~1,2b points)": 1172329500,
+        "450 coupons (~1,7b points)": 1671112500,
+        "500 coupons (~2b points)": 2294578500,
+        "550 coupons (~3b points)": 3056467000,
+        "600 coupons (~4b points)": 3970650000,
+        "650 coupons (~5b points)": 5051216000,
+        "700 coupons (~6b points)": 6311854500,
+        "750 coupons (~8b points)": 7766437500,
+        "800 coupons (~9b points)": 9429103500,
+        "850 coupons (~11b points)": 11313492000,
+        "900 coupons (~13b points)": 13433475000,
+        "950 coupons (~16b points)": 15803241000,
+        "1000 coupons (~18b points)": 18436379500
     }
 
-class AllowDroppodProgression(Toggle):
-    """TODO. Allow the hard drive Gacha to contain progression items."""
-    display_name = "Allow Hard-drive Progression"
+class HardDriveProgressionLimit(Range):
+    """How many Hard-drive locations can contain progression items.
+    Hard-drive locations above this threshold cannot contain progression but can still be useful"""
+    display_name = "Max Hard-drive Progression"
+    default = 0
+    range_start = 0
+    range_end = 100
 
 # class TechTreeInformation(Choice):
-#     """TODO Implement me
+#     """TODO Implement me or not, i dont think we need this
 #     How much information should be displayed in the tech tree.
 
 #     None: No indication what a technology unlocks or who it is for
@@ -286,12 +288,30 @@ class StartingInventoryPreset(ChoiceMap):
     }
     default = "Archipelago"
 
+# options.py
+class GoalSelection(Choice):
+    """What will be your goal(s)? """
+
+    display_name = "Selected Goals"
+    option_space_elevator_packages = 1
+    option_resource_sink_points = 2
+    option_both_goals = 3
+    option_either_goal = 4
+    default = option_space_elevator_packages
+
+class ExperimentalGeneration(Toggle):
+    """Attempts to only mark recipes as progression if they are on your path to victory
+    WARNING: has a very high change of generation failure and should therefor only be used in single player games"""
+    display_name = "ExperimentalGeneration"
+    visibility = Visibility.none
+
 @dataclass
 class SatisfactoryOptions(PerGameCommonOptions):
+    goal_selection: GoalSelection
     final_elevator_tier: ElevatorTier # TODO rename to "final_elevator_package" to avoid confusion over what the value means (the range 0-4 is not the same as the range of tiers 0-8)
     final_resource_sink_points: ResourceSinkPoints
     # tech_tree_information: TechTreeInformation # TODO: NYI
-    # allow_droppod_progression: AllowDroppodProgression #TODO: NYI
+    hard_drive_progression_limit: HardDriveProgressionLimit
     free_sample_equipment: FreeSampleEquipment
     free_sample_buildings: FreeSampleBuildings
     free_sample_parts: FreeSampleParts
@@ -307,3 +327,4 @@ class SatisfactoryOptions(PerGameCommonOptions):
     death_link: DeathLink
     energy_link: EnergyLink
     start_inventory_from_pool: StartInventoryPool
+    experimental_generation: ExperimentalGeneration

@@ -7,6 +7,10 @@
 The [player settings page for this game](../player-settings)
 contains all the options you need to configure and export a config file.
 
+> ⚠ Pre-Release Note: The above link does not work because it would go to the live Archipelago site.
+> Manually construct a yaml yourself from the one pinned in the Discord:
+> <https://discord.com/channels/731205301247803413/1018853131859267656>
+
 ## What does randomization do to this game?
 
 In Satisfactory, the HUB Milestones and MAM Research Nodes are shuffled,
@@ -43,13 +47,13 @@ They may also contain Traps.
 ## What is a Free Sample?
 
 A free sample is a package of items in Satisfactory granted in addition to a technology received from another world.
-<!-- In multiplayer, each player gets a copy of these items. -->
 For equipment and component crafting recipes, this is the output product.
 For buildings, this is the ingredients for the building.
 For example, receiving the [Nobelisk Detonator MAM Node](https://satisfactory.wiki.gg/wiki/Nobelisk_Detonator#Unlocking)
 would give you one Nobelisk Detonator and 50 Nobelisk,
 receiving the [Jump Pads Milestone](https://satisfactory.wiki.gg/wiki/Milestones#Tier_2)
 would give you the ingredients to construct 5 Jump Pads and 5 U-Jelly Landing Pads, etc.
+In Satisfactory multiplayer, each Satisfactory player gets a copy of the sample.
 
 You can separately configure how many samples to receive for buildings, equipment, and crafting components
 in your player settings.
@@ -69,7 +73,7 @@ and are color coded to indicate what Archipelago progression type they are.
 
 Hover over them to read a description, since many Satisfactory UIs (such as the MAM) cut this information off.
 
-![TODO screenshot of HUB with some remote and some local items](/static/generated/docs/Satisfactory/HUB-screenshot.png)
+![screenshot of HUB with some remote and some local items](https://raw.githubusercontent.com/Jarno458/SatisfactoryArchipelagoMod/main/Docs/localAndRemoteItems.JPG)
 
 Upon successful unlock of the technology, the item will be sent to its home world.
 

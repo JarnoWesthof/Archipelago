@@ -1,5 +1,5 @@
 from typing import List, Set, Dict, Tuple, Optional, Callable
-from BaseClasses import MultiWorld, Region, Entrance, Location, CollectionState
+from BaseClasses import MultiWorld, Region, Location, Item, CollectionState
 from .Locations import LocationData
 from .GameLogic import GameLogic, PowerInfrastructureLevel
 from .StateLogic import StateLogic
@@ -21,9 +21,16 @@ class SatisfactoryLocation(Location):
         if (data.rule):
             self.access_rule = data.rule
 
+        if (data.non_progression):
+            self.item_rule = self.non_progression_only
+
+    @staticmethod
+    def non_progression_only(item: Item) -> bool:
+        return not item.advancement
+
 
 def create_regions_and_return_locations(world: MultiWorld, options: SatisfactoryOptions, player: int, 
-            game_logic: GameLogic, state_logic: StateLogic, locations: Tuple[LocationData, ...]):
+            game_logic: GameLogic, state_logic: StateLogic, locations: List[LocationData]):
     
     region_names: List[str] = [
         "Menu",
@@ -64,7 +71,7 @@ def create_regions_and_return_locations(world: MultiWorld, options: Satisfactory
     ]
 
     early_game_buildings: List[str] = [
-        str(PowerInfrastructureLevel.Automated)
+        PowerInfrastructureLevel.Automated.to_name()
     ]
 
     if options.mam_logic_placement.value == Placement.early:
@@ -169,7 +176,7 @@ def connect(regions: Dict[str, Region], source: str, target: str,
     sourceRegion.connect(targetRegion, rule=rule)
 
 
-def get_locations_per_region(locations: Tuple[LocationData, ...]) -> Dict[str, List[LocationData]]:
+def get_locations_per_region(locations: List[LocationData]) -> Dict[str, List[LocationData]]:
     per_region: Dict[str, List[LocationData]]  = {}
 
     for location in locations:

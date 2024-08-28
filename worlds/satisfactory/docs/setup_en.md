@@ -33,11 +33,19 @@ The Player Settings page on the website
 allows you to configure your personal settings and export a config file from them.
 Satisfactory player settings page: [Satisfactory Settings Page](/games/Satisfactory/player-settings)
 
+> ⚠ Pre-Release Note: The above link does not work because it would go to the live Archipelago site.
+> Manually construct a yaml yourself from the one pinned in the Discord:
+> <https://discord.com/channels/731205301247803413/1018853131859267656>
+
 ### Verifying Your Config File
 
 If you would like to validate your config file to make sure it works,
 you may do so on the YAML Validator page.
 YAML Validator page: [Yaml Validation Page](/mysterycheck)
+
+> ⚠ Pre-Release Note: The above link does not work because it would go to the live Archipelago site.
+> Manually construct a yaml yourself from the one pinned in the Discord:
+> <https://discord.com/channels/731205301247803413/1018853131859267656>
 
 ### Starting Inventory
 
@@ -50,6 +58,12 @@ Advanced users can utilize the
 [Weighted Options Page](/weighted-options)
 and [Plando](/tutorial/Archipelago/plando)
 to futher customize their experience.
+
+> ⚠ Pre-Release Note: The above links do not work because it would go to the live Archipelago site.
+> See these links instead:
+>
+> - <https://archipelago.gg/tutorial/Archipelago/advanced_settings/en>
+> - <https://archipelago.gg/tutorial/Archipelago/plando/en>
 
 ## Prepare to Host Your Own Satisfactory Game
 
@@ -109,6 +123,10 @@ As soon as you have the relevant mods installed, you do not need to launch the g
 You may also wish to install some of the suggested mods mentioned on the
 [Archipelago Info page for Satisfactory](/games/Satisfactory/info/en#additional-mods).
 
+> ⚠ Pre-Release Note: The above link does not work because it would go to the live Archipelago site.
+> Use this link instead:
+> <https://github.com/Jarno458/Archipelago/blob/Satisfactory/worlds/satisfactory/docs/en_Satisfactory.md#additional-mods>
+
 ### Entering Connection Details
 
 After you have installed the mods, launch the game via the Mod Manager or via your preferred method.
@@ -144,6 +162,10 @@ you can issue the `/help` command in the game's chat to list available commands,
 For more information about the commands you can use, see the [Commands Guide](/tutorial/Archipelago/commands/en).
 Note that Archipelago commands are not prefixed with `!` inside of Satisfactory.
 You may wish to use the Text Client to run commands since Satisfactory's in game chat is not very user friendly.
+
+> ⚠ Pre-Release Note: The above link does not work because it would go to the live Archipelago site.
+> Use this link instead:
+> <https://archipelago.gg/tutorial/Archipelago/commands/en>
 
 <!-- ## Other Settings
 

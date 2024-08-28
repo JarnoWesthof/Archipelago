@@ -1,9 +1,13 @@
+import copy
 from random import Random
 from typing import ClassVar, Dict, Set, List, TextIO, Tuple, Optional
 from BaseClasses import Item, ItemClassification as C, MultiWorld
 from .GameLogic import GameLogic, Recipe
 from .Options import SatisfactoryOptions
 from .ItemData import ItemData, ItemGroups as G
+from .Options import SatisfactoryOptions
+import logging
+
 
 class Items:
     item_data: ClassVar[Dict[str, ItemData]] = {
@@ -45,8 +49,8 @@ class Items:
         "Bundle: Empty Canister": ItemData(frozenset({G.Parts}), 1338034),
         "Bundle: Empty Fluid Tank": ItemData(frozenset({G.Parts}), 1338035),
         "Bundle: Encased Industrial Beam": ItemData(frozenset({G.Parts}), 1338036),
-        "Bundle: Encased Plutonium Cell": ItemData(frozenset({G.Parts}), 1338037, C.trap),
-        "Bundle: Encased Uranium Cell": ItemData(frozenset({G.Parts}), 1338038, C.trap),
+        "Bundle: Encased Plutonium Cell": ItemData(frozenset({G.Trap}), 1338037, C.trap),
+        "Bundle: Encased Uranium Cell": ItemData(frozenset({G.Trap}), 1338038, C.trap),
         "Bundle: Fabric": ItemData(frozenset({G.Parts}), 1338039),
         "Bundle: FICSIT Coupon": ItemData(frozenset({G.Parts}), 1338040),
         "Bundle: Flower Petals": ItemData(frozenset({G.Parts}), 1338041),
@@ -144,16 +148,16 @@ class Items:
         "Bundle: Explosive Rebar": ItemData(frozenset({G.Ammo}), 1338159),
         "Bundle: Factory Cart": ItemData(frozenset({G.Equipment}), 1338160),
         "Bundle: Factory Cart (golden)": ItemData(frozenset({G.Equipment}), 1338161, count=0),
-        "Bundle: Gas Mask": ItemData(frozenset({G.Equipment}), 1338162, C.progression),
+        "Bundle: Gas Mask": ItemData(frozenset({G.Equipment}), 1338162),
         "Bundle: Gas Nobelisk": ItemData(frozenset({G.Ammo}), 1338163),
-        "Bundle: Hazmat Suit": ItemData(frozenset({G.Equipment}), 1338164, C.progression),
+        "Bundle: Hazmat Suit": ItemData(frozenset({G.Equipment}), 1338164),
         "Bundle: Homing Rifle Ammo": ItemData(frozenset({G.Ammo}), 1338165),
-        "Bundle: Hover Pack": ItemData(frozenset({G.Equipment}), 1338166, C.progression),
+        "Bundle: Hover Pack": ItemData(frozenset({G.Equipment}), 1338166),
         "Bundle: Iron Rebar": ItemData(frozenset({G.Ammo}), 1338167),
-        "Bundle: Jetpack": ItemData(frozenset({G.Equipment}), 1338168, C.progression),
+        "Bundle: Jetpack": ItemData(frozenset({G.Equipment}), 1338168),
         "Bundle: Medicinal Inhaler": ItemData(frozenset({G.Ammo}), 1338169),
         "Bundle: Nobelisk": ItemData(frozenset({G.Ammo}), 1338170),
-        "Bundle: Nobelisk Detonator": ItemData(frozenset({G.Equipment}), 1338171, C.progression),
+        "Bundle: Nobelisk Detonator": ItemData(frozenset({G.Equipment}), 1338171),
         "Bundle: Nuke Nobelisk": ItemData(frozenset({G.Ammo}), 1338172),
         "Bundle: Object Scanner": ItemData(frozenset({G.Equipment}), 1338173),
         "Bundle: Paleberry": ItemData(frozenset({G.Ammo}), 1338174),
@@ -169,7 +173,7 @@ class Items:
         "Bundle: Xeno-Zapper": ItemData(frozenset({G.Equipment}), 1338184),
         "Bundle: Zipline": ItemData(frozenset({G.Equipment}), 1338185),
         "Bundle: Portable Miner": ItemData(frozenset({G.Equipment}), 1338186),
-        "Bundle: Gas Filter": ItemData(frozenset({G.Ammo}), 1338187, C.progression),
+        "Bundle: Gas Filter": ItemData(frozenset({G.Ammo}), 1338187),
 
         "Small Inflated Pocket Dimension": ItemData(frozenset({G.Upgrades}), 1338188, C.useful, 11),
         "Inflated Pocket Dimension": ItemData(frozenset({G.Upgrades}), 1338189, C.useful, 5),
@@ -632,23 +636,32 @@ class Items:
     logic: GameLogic
     random: Random
     precalculated_progression_recipes: Optional[Dict[str, Recipe]]
+    precalculated_progression_recipes_names: Optional[Set[str]]
 
 
-    def __init__(self, player: Optional[int], logic: GameLogic, random: Random):
+    def __init__(self, player: Optional[int], logic: GameLogic, random: Random, options: SatisfactoryOptions):
         self.player = player
         self.logic = logic
         self.random = random
 
-        if False: # TODO major performance boost if we can get it stable
+        if options.experimental_generation: # TODO major performance boost if we can get it stable
             self.precalculated_progression_recipes = self.select_progression_recipes()
+            self.precalculated_progression_recipes_names = set(
+                recipe.name for recipe in self.precalculated_progression_recipes.values()
+            )
         else:
             self.precalculated_progression_recipes = None
+            self.precalculated_progression_recipes_names = None
 
 
     def select_recipe_for_part_that_does_not_depend_on_parent_recipes(self,
             part: str, parts_to_avoid: Dict[str, str]) -> Recipe:
         
         recipes: List[Recipe] = list(self.logic.recipes[part])
+
+        implicit_recipe = next(filter(lambda r: r.implicitly_unlocked, recipes), None)
+        if implicit_recipe:
+            return implicit_recipe
 
         while (len(recipes) > 0):
             recipe: Recipe = recipes.pop(self.random.randrange(len(recipes)))
@@ -682,11 +695,55 @@ class Items:
                     self.build_progression_recipe_tree(child_recipe.inputs, selected_recipes)
 
 
-    def select_progression_recipes(self) -> Dict[str, str]:
-        required_top_level_parts: Tuple[str, ...] = ("Versatile Framework", "Modular Engine", "Adaptive Control Unit")
+    def select_progression_recipes(self) -> Dict[str, Recipe]:
+        selected_recipes: Dict[str, Recipe] = {}
+
+        while not self.is_beatable(selected_recipes):
+            selected_recipes = self.select_random_progression_recipes()
+
+        return selected_recipes
+
+
+    def is_beatable(self, recipes: Dict[str, Recipe]) -> bool:
+        if not recipes:
+            return False
+
+        craftable_parts: Set[str] = set()
+        pending_recipes_by_part: Dict[str, Recipe] = copy.deepcopy(recipes)
+
+        for part, recipe_tuples in self.logic.recipes.items():
+            for recipe in recipe_tuples:
+                if recipe.implicitly_unlocked:
+                    craftable_parts.add(part)
+
+        while pending_recipes_by_part:
+            new_collected_parts: Set[str] = set()
+
+            for part, recipe in pending_recipes_by_part.items():
+                if all(input in craftable_parts for input in recipe.inputs):
+                    new_collected_parts.add(part)
+
+            if not new_collected_parts:
+                return False
+
+            craftable_parts = craftable_parts.union(new_collected_parts)
+
+            for part in new_collected_parts:
+                del pending_recipes_by_part[part]
+
+        return True
+
+
+    def select_random_progression_recipes(self) -> Dict[str, Recipe]:
         selected_recipes: Dict[str, str] = {}
 
-        self.build_progression_recipe_tree(required_top_level_parts, selected_recipes)
+        for part, recipes in self.logic.recipes.items():
+
+            implicit_recipe: Recipe = next(filter(lambda r: r.implicitly_unlocked, recipes), None)
+            if implicit_recipe:
+                continue
+
+            selected_recipes[part] = self.random.choice(recipes)
 
         return selected_recipes
 
@@ -694,12 +751,17 @@ class Items:
     @classmethod
     def create_item(cls, instance: Optional["Items"], name: str, player: int) -> Item:
         data: ItemData = cls.item_data[name]
+        type = data.type
 
-        if instance and instance.precalculated_progression_recipes and \
-                name not in instance.precalculated_progression_recipes:
-            return Item(name, C.useful, data.code, instance.player)
+        if type == C.progression and not name.startswith("Building: ") and \
+                instance and instance.precalculated_progression_recipes_names:
+            if name not in instance.precalculated_progression_recipes_names:
+                type = C.useful
+                logging.info(f"Downscaling .. {name}")
+            else:
+                logging.warn(f"Preserving .. {name}")
 
-        return Item(name, data.type, data.code, player)
+        return Item(name, type, data.code, player)
 
 
     def get_filler_item_name(self, random: Random, options: SatisfactoryOptions) -> str:
@@ -758,5 +820,5 @@ class Items:
                 f"{player_name}{part} -> {recipe.name}" 
                 for part, recipes_per_part in self.logic.recipes.items()
                 for recipe in recipes_per_part 
-                if recipe.name in self.precalculated_progression_recipes
+                if recipe.name in self.precalculated_progression_recipes_names
             ))
