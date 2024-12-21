@@ -96,6 +96,7 @@ def create_regions_and_return_locations(world: MultiWorld, options: Satisfactory
     connect(regions, "Hub Tier 5", "Hub Tier 6")
     connect(regions, "Hub Tier 6", "Hub Tier 7", lambda state: state.has("Elevator Tier 3", player))
     connect(regions, "Hub Tier 7", "Hub Tier 8")
+    connect(regions, "Hub Tier 8", "Hub Tier 9", lambda state: state.has("Elevator Tier 4", player))
     connect(regions, "Overworld", "Gas Area", lambda state:
                                 state_logic.can_produce_all(state, ("Gas Mask", "Gas Filter")))
     connect(regions, "Overworld", "Radioactive Area", lambda state:

@@ -281,7 +281,7 @@ class Locations():
 
         location_table = self.get_base_location_table()
         location_table.extend(self.get_hub_locations())
-        location_table.extend(self.get_drop_pod_locations())
+        #location_table.extend(self.get_drop_pod_locations())
         location_table.append(LocationData("Overworld", "UpperBound", 1338999))
 
         return {location.name: location.code for location in location_table}
@@ -294,7 +294,7 @@ class Locations():
 
         location_table = self.get_base_location_table()
         location_table.extend(self.get_hub_locations())
-        location_table.extend(self.get_drop_pod_locations())
+        #location_table.extend(self.get_drop_pod_locations())
         location_table.extend(self.get_logical_event_locations())
 
         return location_table
@@ -340,32 +340,32 @@ class Locations():
 
         return location_table
     
-    def get_drop_pod_locations(self) -> List[LocationData]:
-        drop_pod_locations: List[DropPod] = []
+    # def get_drop_pod_locations(self) -> List[LocationData]:
+    #     drop_pod_locations: List[DropPod] = []
 
-        bucket_size: int = 0
-        drop_pod_data: List[DropPodData] = []
+    #     bucket_size: int = 0
+    #     drop_pod_data: List[DropPodData] = []
 
-        if self.game_logic:
-            bucket_size = floor(
-                (self.drop_pod_location_id_end - self.drop_pod_location_id_start) / len(self.game_logic.hub_layout))
+    #     if self.game_logic:
+    #         bucket_size = floor(
+    #             (self.drop_pod_location_id_end - self.drop_pod_location_id_start) / len(self.game_logic.hub_layout))
 
-            drop_pod_data = self.game_logic.drop_pods
-            # sort, easily obtainable first, should be deterministic
-            drop_pod_data.sort(key = lambda data: ("!" if data.item == None else data.item) + str(data.x - data.z))
+    #         drop_pod_data = self.game_logic.drop_pods
+    #         # sort, easily obtainable first, should be deterministic
+    #         drop_pod_data.sort(key = lambda data: ("!" if data.item == None else data.item) + str(data.x - data.z))
 
-        for location_id in range(self.drop_pod_location_id_start, self.drop_pod_location_id_end + 1):
-            if not self.game_logic or not self.state_logic or not self.options:
-                drop_pod_locations.append(DropPod(DropPodData(0, 0, 0, None, 0), None, location_id, 1, False))
-            else:
-                if not self.options.hard_drive_progression_limit:
-                    break
+    #     for location_id in range(self.drop_pod_location_id_start, self.drop_pod_location_id_end + 1):
+    #         if not self.game_logic or not self.state_logic or not self.options:
+    #             drop_pod_locations.append(DropPod(DropPodData(0, 0, 0, None, 0), None, location_id, 1, False))
+    #         else:
+    #             if not self.options.hard_drive_progression_limit:
+    #                 break
 
-                location_id_normalized: int = location_id - self.drop_pod_location_id_start
-                data: DropPodData = drop_pod_data[location_id_normalized]
-                can_hold_progression: bool = location_id_normalized < self.options.hard_drive_progression_limit.value
-                tier = min(ceil((location_id_normalized + 1) / bucket_size), len(self.game_logic.hub_layout))
+    #             location_id_normalized: int = location_id - self.drop_pod_location_id_start
+    #             data: DropPodData = drop_pod_data[location_id_normalized]
+    #             can_hold_progression: bool = location_id_normalized < self.options.hard_drive_progression_limit.value
+    #             tier = min(ceil((location_id_normalized + 1) / bucket_size), len(self.game_logic.hub_layout))
 
-                drop_pod_locations.append(DropPod(data, self.state_logic, location_id, tier, can_hold_progression))
+    #             drop_pod_locations.append(DropPod(data, self.state_logic, location_id, tier, can_hold_progression))
 
-        return drop_pod_locations
+    #     return drop_pod_locations
