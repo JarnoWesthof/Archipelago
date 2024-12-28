@@ -360,9 +360,9 @@ class Items:
         "Recipe: Thermal Propulsion Rocket": ItemData(frozenset({G.Recipe}), 1338361, C.progression),
         "Recipe: Ficsonium": ItemData(frozenset({G.Recipe}), 1338362), # 1.0
         "Recipe: Ficsonium Fuel Rod": ItemData(frozenset({G.Recipe}), 1338363), # 1.0
-        "Recipe: Dark Matter Crystal": ItemData(frozenset({G.Recipe}), 1338364), # 1.0
-        "Recipe: Dark Matter Crystallization": ItemData(frozenset({G.Recipe}), 1338365), # 1.0
-        "Recipe: Dark Matter Trap": ItemData(frozenset({G.Recipe}), 1338366), # 1.0
+        "Recipe: Dark Matter Crystal": ItemData(frozenset({G.Recipe}), 1338364, C.progression), # 1.0
+        "Recipe: Dark Matter Crystallization": ItemData(frozenset({G.Recipe}), 1338365, C.progression), # 1.0
+        "Recipe: Dark Matter Trap": ItemData(frozenset({G.Recipe}), 1338366, C.progression), # 1.0
         "Recipe: Pulse Nobelisk":  ItemData(frozenset({G.Recipe}), 1338367, C.useful),
         "Recipe: Hatcher Protein": ItemData(frozenset({G.Recipe}), 1338368, C.progression),
         "Recipe: Hog Protein": ItemData(frozenset({G.Recipe}), 1338369, C.progression),
@@ -441,7 +441,8 @@ class Items:
         "Recipe: Pink Diamonds": ItemData(frozenset({G.Recipe}), 1338440, C.progression),
         "Recipe: Turbo Diamonds": ItemData(frozenset({G.Recipe}), 1338441, C.progression),
         "Recipe: Time Crystal": ItemData(frozenset({G.Recipe}), 1338442, C.progression),
-        #"Recipe: Excited Photonic Matter": ItemData(frozenset({G.Recipe}), 1338443, C.progression), should probably be unlocked with converter
+        "Recipe: Superposition Oscillator": ItemData(frozenset({G.Recipe}), 1338443, C.progression),
+        #"Recipe: Excited Photonic Matter": ItemData(frozenset({G.Recipe}), 1338444, C.progression), should probably be unlocked with converter
 # 1.0
 
         #1338434 - 1338599 Reserved for future recipes

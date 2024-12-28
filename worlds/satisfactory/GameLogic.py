@@ -130,6 +130,8 @@ class DropPodData:
 
 class GameLogic:
     recipes: Dict[str, Tuple[Recipe, ...]] = {
+        # This Dict should only contain items that are used somewhere in a logic chain
+
         # Exploration Items
         "Leaves": (
             Recipe("Leaves", handcraftable=True, implicitly_unlocked=True), ),
@@ -518,7 +520,7 @@ class GameLogic:
         "SAM Fluctuator": (
             Recipe("SAM Fluctuator", "Manufacturer", ("Reanimated SAM", "Steel Pipe", "Wire"), handcraftable=True), ),
         "Excited Photonic Matter": (
-            Recipe("Excited Photonic Matter", "Converter"), ),
+            Recipe("Excited Photonic Matter", "Converter", implicitly_unlocked=True), ),
         "Dark Matter Crystal": (
             Recipe("Dark Matter Crystal", "Particle Accelerator", ("Diamonds", ), additional_outputs=("Dark Matter Residue", )),
             Recipe("Dark Matter Crystallization", "Particle Accelerator", additional_outputs=("Dark Matter Residue", )),
@@ -529,24 +531,24 @@ class GameLogic:
             Recipe("Biochemical Sculptor", "Blender", ("Assembly Director System", "Ficsite Trigon", "Water")), ),
         "Ballistic Warp Drive": (
             Recipe("Ballistic Warp Drive", "Manufacturer", ("Thermal Propulsion Rocket", "Singularity Cell", "Superposition Oscillator", "Dark Matter Crystal")), ),
-        "Ficsonium": (
-            Recipe("Ficsonium", "Particle Accelerator", ("Plutonium Waste", "Singularity Cell", "Dark Matter Residue")), ),
-        # All Quantum Encoder recipes have `Excited Photonic Matter` set as an input, this hack makes the logic make sure you can get rid of it
+        #"Ficsonium": (
+        #    Recipe("Ficsonium", "Particle Accelerator", ("Plutonium Waste", "Singularity Cell", "Dark Matter Residue")), ),
+        # All Quantum Encoder recipes have `Dark Matter Residue` set as an input, this hack makes the logic make sure you can get rid of it
         "Dark Matter Residue": (
+            #Recipe("Ficsonium", "Particle Accelerator", ("Plutonium Waste", "Singularity Cell"), additional_outputs=("Ficsonium", )),
             Recipe("Dark Matter Crystal", "Particle Accelerator", ("Diamonds", ), additional_outputs=("Dark Matter Crystal", )),
             Recipe("Dark Matter Crystallization", "Particle Accelerator", additional_outputs=("Dark Matter Crystal", )),
-            Recipe("Dark Matter Trap", "Particle Accelerator", ("Time Crystal", ), additional_outputs=("Dark Matter Crystal", )),
-            Recipe("Ficsonium", "Particle Accelerator", ("Plutonium Waste", "Singularity Cell"), additional_outputs=("Ficsonium", ))),
+            Recipe("Dark Matter Trap", "Particle Accelerator", ("Time Crystal", ), additional_outputs=("Dark Matter Crystal", ))),
         "Superposition Oscillator": (
             Recipe("Superposition Oscillator", "Quantum Encoder", ("Dark Matter Residue", "Excited Photonic Matter", "Dark Matter Crystal", "Crystal Oscillator", "Alclad Aluminum Sheet")), ),
         "Neural-Quantum Processor": (
             Recipe("Neural-Quantum Processor", "Quantum Encoder", ("Dark Matter Residue", "Excited Photonic Matter", "Time Crystal", "Supercomputer", "Ficsite Trigon")), ),
         "AI Expansion Server": (
             Recipe("AI Expansion Server", "Quantum Encoder", ("Dark Matter Residue", "Excited Photonic Matter", "Magnetic Field Generator", "Neural-Quantum Processor", "Superposition Oscillator")), ),
-        "Ficsonium Fuel Rod": (
-            Recipe("Ficsonium Fuel Rod", "Quantum Encoder", ("Dark Matter Residue", "Excited Photonic Matter", "Ficsonium", "Electromagnetic Control Rod", "Ficsite Trigon")), ),
-        "Alien Power Matrix": ( # Might not be needed as nothing requires `Alien Power Matrix` as an input
-            Recipe("Alien Power Matrix", "Quantum Encoder", ("Dark Matter Residue", "Excited Photonic Matter", "SAM Fluctuator", "Power Shard", "Superposition Oscillator")), ),
+        #"Ficsonium Fuel Rod": (
+        #    Recipe("Ficsonium Fuel Rod", "Quantum Encoder", ("Dark Matter Residue", "Excited Photonic Matter", "Ficsonium", "Electromagnetic Control Rod", "Ficsite Trigon")), ),
+        #"Alien Power Matrix": ( # Might not be needed as nothing requires `Alien Power Matrix` as an input
+        #    Recipe("Alien Power Matrix", "Quantum Encoder", ("Dark Matter Residue", "Excited Photonic Matter", "SAM Fluctuator", "Power Shard", "Superposition Oscillator")), ),
 
             # TODO add leached recipes
             # TODO add foundry molded recipes
@@ -703,7 +705,7 @@ class GameLogic:
             {"Time Crystal":50, "Ficsite Trigon":100, "Turbo Motor":200, "Turbo Motor":400 },
             {"Neural-Quantum Processor":100, "Time Crystal":250, "Ficsite Trigon":500, "Fused Modular Frame":500 }, 
             {"Superposition Oscillator":100, "Turbo Motor":250, "Radio Control Unit":500, "SAM Fluctuator":1000 },
-            {"Time Crystal":250, "Ficsite Trigon":250, "Alclad Aluminum Sheet":500, " Iron Plate":10000 },
+            {"Time Crystal":250, "Ficsite Trigon":250, "Alclad Aluminum Sheet":500, "Iron Plate":10000 },
         ),
     )
 
