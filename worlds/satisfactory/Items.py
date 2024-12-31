@@ -34,7 +34,7 @@ class Items:
         "Bundle: Caterium Ore": ItemData(frozenset({G.Parts}), 1338019),
         "Bundle: Circuit Board": ItemData(frozenset({G.Parts}), 1338020),
         "Bundle: Coal": ItemData(frozenset({G.Parts}), 1338021),
-        "Bundle: Color Cartridge": ItemData(frozenset({G.Parts}), 1338022),
+        "Bundle: Singularity Cell": ItemData(frozenset({G.Parts}), 1338022), #1.0
         "Bundle: Compacted Coal": ItemData(frozenset({G.Parts}), 1338023),
         "Bundle: Computer": ItemData(frozenset({G.Parts}), 1338024),
         "Bundle: Concrete": ItemData(frozenset({G.Parts}), 1338025),
@@ -140,14 +140,15 @@ class Items:
         "Bundle: Ficsite Trigon": ItemData(frozenset({G.Parts}), 1338124),
         "Bundle: Reanimated SAM": ItemData(frozenset({G.Parts}), 1338125),
         "Bundle: SAM Fluctuator": ItemData(frozenset({G.Parts}), 1338126),
-        "Bundle: Singularity Cell": ItemData(frozenset({G.Parts}), 1338127),
-        "Bundle: Biochemical Sculptor": ItemData(frozenset({G.Parts}), 1338128),
-        "Bundle: Ballistic Warp Drive": ItemData(frozenset({G.Parts}), 1338129),
-        "Bundle: Ficsonium": ItemData(frozenset({G.Trap}), 1338130, C.trap),
-        "Bundle: Ficsonium Fuel Rod": ItemData(frozenset({G.Trap}), 1338131, C.trap),
+        "Bundle: Biochemical Sculptor": ItemData(frozenset({G.Parts}), 1338127),
+        "Bundle: Ballistic Warp Drive": ItemData(frozenset({G.Parts}), 1338128),
+        "Bundle: Ficsonium": ItemData(frozenset({G.Trap}), 1338129, C.trap),
+        "Bundle: Ficsonium Fuel Rod": ItemData(frozenset({G.Trap}), 1338130, C.trap),
+        "Bundle: Packaged Rocket Fuel": ItemData(frozenset({G.Parts}), 1338031),
+        "Bundle: Packaged Ionized Fuel": ItemData(frozenset({G.Parts}), 1338032),
 # 1.0
 
-        #1338121 - 1338149 Reserved for future parts
+        #1338131 - 1338149 Reserved for future parts
 
         # Equipment / Ammo
         "Bundle: Bacon Agaric": ItemData(frozenset({G.Ammo}), 1338150),
@@ -341,9 +342,9 @@ class Items:
         "Recipe: Infused Uranium Cell": ItemData(frozenset({G.Recipe}), 1338342, C.progression),
         "Recipe: Uranium Fuel Rod": ItemData(frozenset({G.Recipe}), 1338343, C.progression),
         "Recipe: Uranium Fuel Unit": ItemData(frozenset({G.Recipe}), 1338344, C.progression),
-        "Recipe: Beacon": ItemData(frozenset({G.Recipe}), 1338345, C.progression),
-        "Recipe: Crystal Beacon": ItemData(frozenset({G.Recipe}), 1338346, C.progression),
-        #"Recipe: Uranium Waste": ItemData(frozenset({G.Recipe}), 1338347, C.progression),
+        #"Recipe: Beacon": ItemData(frozenset({G.Recipe}), 1338345, C.progression), # removed in 1.0
+        #"Recipe: Crystal Beacon": ItemData(frozenset({G.Recipe}), 1338346, C.progression), # removed in 1.0
+        #"Recipe: Uranium Waste": ItemData(frozenset({G.Recipe}), 1338347, C.progression), # not a recipe
         "Recipe: Non-fissile Uranium": ItemData(frozenset({G.Recipe}), 1338348, C.progression),
         "Recipe: Fertile Uranium": ItemData(frozenset({G.Recipe}), 1338349, C.progression),
         "Recipe: Plutonium Pellet": ItemData(frozenset({G.Recipe}), 1338350, C.progression),
@@ -443,6 +444,11 @@ class Items:
         "Recipe: Time Crystal": ItemData(frozenset({G.Recipe}), 1338442, C.progression),
         "Recipe: Superposition Oscillator": ItemData(frozenset({G.Recipe}), 1338443, C.progression),
         #"Recipe: Excited Photonic Matter": ItemData(frozenset({G.Recipe}), 1338444, C.progression), should probably be unlocked with converter
+        "Recipe: Rocket Fuel": ItemData(frozenset({G.Recipe}), 1338445, C.useful),
+        "Recipe: Nitro Rocket Fuel": ItemData(frozenset({G.Recipe}), 1338446, C.useful),
+        "Recipe: Ionized Fuel": ItemData(frozenset({G.Recipe}), 1338447, C.useful),
+        "Recipe: Packaged Rocket Fuel": ItemData(frozenset({G.Recipe}), 1338448, C.useful),
+        "Recipe: Packaged Ionized Fuel": ItemData(frozenset({G.Recipe}), 1338449, C.useful),
 # 1.0
 
         #1338434 - 1338599 Reserved for future recipes
@@ -575,13 +581,14 @@ class Items:
 # 1.0
         "Building: Converter": ItemData(frozenset({G.Building}), 1338722, C.progression),
         "Building: Quantum Encoder": ItemData(frozenset({G.Building}), 1338723, C.progression),
-        "Building: Quantum Encoder": ItemData(frozenset({G.Building}), 1338723, C.progression),
         "Building: Portal": ItemData(frozenset({G.Building}), 1338724, C.filler),
         "Building: Conveyor Mk.6": ItemData(frozenset({G.Building, G.ConveyorMk6}), 1338725, C.progression),
         "Building: Conveyor Lift Mk.6": ItemData(frozenset({G.Building, G.ConveyorMk6}), 1338726, C.useful),
+        "Building: Alien Power Augmenter": ItemData(frozenset({G.Building}), 1338727, C.progression),
+        "Building: Dimensional Depot Uploader": ItemData(frozenset({G.Building}), 1338728, C.useful),
 # 1.0
 
-        #1338722 - 1338749 Reserved for buildings
+        #1338722 - 1338749 Reserved for Cosmetics
 
         "Customizer: Asphalt Foundation Material": ItemData(frozenset({G.Customizer, G.Foundations}), 1338750, C.filler, 0),
         "Customizer: Concrete Foundation Material": ItemData(frozenset({G.Customizer, G.Foundations}), 1338751, C.filler, 0),
@@ -600,6 +607,16 @@ class Items:
         "Customizer: Number Patterns": ItemData(frozenset({G.Customizer, G.Foundations}), 1338764, C.filler, 0),
         "Customizer: Pathway Patterns": ItemData(frozenset({G.Customizer, G.Foundations}), 1338765, C.filler, 0),
         "Customizer: Factory Zone Patterns": ItemData(frozenset({G.Customizer, G.Foundations}), 1338766, C.filler, 0),
+
+# 1.0
+        "Customizer: Steel-Framed Windows": ItemData(frozenset({G.Customizer, G.Walls}), 1338767, C.filler, 0), 
+        "Customizer: Construction Fences": ItemData(frozenset({G.Customizer}), 1338768, C.filler, 0), 
+        "Customizer: Unpainted Finish": ItemData(frozenset({G.Customizer}), 1338769, C.filler, 0), 
+        "Customizer: Copper Paint Finish": ItemData(frozenset({G.Customizer}), 1338770, C.filler, 0), 
+        "Customizer: Chrome Paint Finish": ItemData(frozenset({G.Customizer}), 1338771, C.filler, 0), 
+        "Customizer: Carbon Steel Finish": ItemData(frozenset({G.Customizer}), 1338772, C.filler, 0), 
+        "Customizer: Caterium Paint Finish": ItemData(frozenset({G.Customizer}), 1338773, C.filler, 0), 
+# 1.0
 
         #1338767 - 1338799 Reserved for buildings
 

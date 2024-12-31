@@ -307,7 +307,7 @@ class GameLogic:
             Recipe("Encased Industrial Beam", "Assembler", ("Steel Beam", "Concrete"), handcraftable=True),
             Recipe("Encased Industrial Pipe", "Assembler", ("Steel Pipe", "Concrete"))),
         "Computer": (
-            Recipe("Computer", "Manufacturer", ("Circuit Board", "Cable", "Plastic", "Screw"), minimal_belt_speed=3, handcraftable=True),
+            Recipe("Computer", "Manufacturer", ("Circuit Board", "Cable", "Plastic"), minimal_belt_speed=3, handcraftable=True),
             Recipe("Crystal Computer", "Assembler", ("Circuit Board", "Crystal Oscillator")),
             Recipe("Caterium Computer", "Manufacturer", ("Circuit Board", "Quickwire", "Rubber"), minimal_belt_speed=2)),
         "Circuit Board": (
@@ -341,7 +341,7 @@ class GameLogic:
             Recipe("Adaptive Control Unit", "Manufacturer", ("Automated Wiring", "Circuit Board", "Heavy Modular Frame", "Computer")), ),
         "Portable Miner": (
             Recipe("Portable Miner", "Equipment Workshop", ("Iron Rod", "Iron Plate"), handcraftable=True, minimal_belt_speed=0, implicitly_unlocked=True),
-            Recipe("Automated Miner", "Manufacturer", ("Motor", "Steel Pipe", "Iron Rod", "Iron Plate")), ),
+            Recipe("Automated Miner", "Manufacturer", ("Steel Pipe", "Iron Plate")), ),
         "Alumina Solution": (
             Recipe("Alumina Solution", "Refinery", ("Bauxite", "Water"), additional_outputs=("Silica", ), minimal_belt_speed=2), 
             Recipe("Sloppy Alumina", "Refinery", ("Bauxite", "Water"), minimal_belt_speed=3)),
@@ -392,11 +392,7 @@ class GameLogic:
             Recipe("Infused Uranium Cell", "Manufacturer", ("Uranium", "Silica", "Sulfur", "Quickwire"), minimal_belt_speed=2)),
         "Uranium Fuel Rod": (
             Recipe("Uranium Fuel Rod", "Manufacturer", ("Encased Uranium Cell", "Encased Industrial Beam", "Electromagnetic Control Rod")), 
-            Recipe("Uranium Fuel Unit", "Manufacturer", ("Encased Uranium Cell", "Electromagnetic Control Rod", "Crystal Oscillator", "Beacon"))),
-        "Beacon": (
-            Recipe("Beacon", "Equipment Workshop", ("Iron Plate", "Iron Rod", "Wire", "Cable"), handcraftable=True, minimal_belt_speed=0), 
-            Recipe("Beacon", "Manufacturer", ("Iron Plate", "Iron Rod", "Wire", "Cable")),
-            Recipe("Crystal Beacon", "Manufacturer", ("Steel Beam", "Steel Pipe", "Crystal Oscillator"))),
+            Recipe("Uranium Fuel Unit", "Manufacturer", ("Encased Uranium Cell", "Electromagnetic Control Rod", "Crystal Oscillator", "Rotor"))),
         "Non-fissile Uranium": (
             Recipe("Non-fissile Uranium", "Blender", ("Uranium Waste", "Silica", "Nitric Acid", "Sulfuric Acid"), additional_outputs=("Water", )), 
             Recipe("Fertile Uranium", "Blender", ("Uranium", "Uranium Waste", "Nitric Acid", "Sulfuric Acid"), additional_outputs=("Water", ), minimal_belt_speed=2)),
@@ -417,7 +413,7 @@ class GameLogic:
         "Assembly Director System": (
             Recipe("Assembly Director System", "Assembler", ("Adaptive Control Unit", "Supercomputer")), ),
         "Magnetic Field Generator": (
-            Recipe("Magnetic Field Generator", "Manufacturer", ("Versatile Framework", "Electromagnetic Control Rod", "Battery")), ),
+            Recipe("Magnetic Field Generator", "Assembler", ("Versatile Framework", "Electromagnetic Control Rod")), ),
         "Copper Powder": (
             Recipe("Copper Powder", "Constructor", ("Copper Ingot", ), handcraftable=True), ),
         "Nuclear Pasta": (
@@ -498,6 +494,15 @@ class GameLogic:
             Recipe("Xeno-Zapper", "Equipment Workshop", ("Iron Rod", "Reinforced Iron Plate", "Cable", "Wire"), handcraftable=True, implicitly_unlocked=True), ),
 
 #1.0
+        #"Rocket Fuel": (
+        #    Recipe("Rocket Fuel", "Blender", ("Turbofuel", "Nitric Acid"), additional_outputs=("Compacted Coal", )),
+        #    Recipe("Nitro Rocket Fuel", "Blender", ("Fuel", "Nitrogen Gas", "Sulfur", "Coal"), minimal_belt_speed=2, additional_outputs=("Compacted Coal", ))),
+        #"Ionized Fuel": (
+        #    Recipe("Ionized Fuel", "Refinery", ("Rocket Fuel", "Power Shard"), additional_outputs=("Compacted Coal", )), ),
+        #"Packaged Rocket Fuel": (
+        #    Recipe("Packaged Rocket Fuel", "Packager", ("Rocket Fuel", "Empty Fluid Tank")), ),
+        #"Packaged Ionized Fuel": (
+        #    Recipe("Packaged Ionized Fuel", "Packager", ("Ionized Fuel", "Empty Fluid Tank")), ),
         "Diamonds": (
             Recipe("Diamonds", "Particle Accelerator", ("Coal", ), minimal_belt_speed=5),
             Recipe("Cloudy Diamonds", "Particle Accelerator", ("Coal", "Limestone"), minimal_belt_speed=4),
@@ -553,6 +558,7 @@ class GameLogic:
             # TODO add leached recipes
             # TODO add foundry molded recipes
             # add disolved silica
+            # todo MAM nodes
 #1.0
 
         # TODO transport types aren't currently in logic
@@ -569,7 +575,7 @@ class GameLogic:
         "Biomass Burner": Building("Biomass Burner", ("Iron Plate", "Iron Rod", "Wire"), implicitly_unlocked=True),
         "Coal Generator": Building("Coal Generator", ("Reinforced Iron Plate", "Rotor", "Cable")),
         "Fuel Generator": Building("Fuel Generator", ("Computer", "Heavy Modular Frame", "Motor", "Rubber", "Quickwire")),
-        "Geothermal Generator": Building("Geothermal Generator", ("Supercomputer", "Heavy Modular Frame", "High-Speed Connector", "Copper Sheet", "Rubber")),
+        "Geothermal Generator": Building("Geothermal Generator", ("Motor", "Modular Frame", "High-Speed Connector", "Copper Sheet", "Wire")),
         "Nuclear Power Plant": Building("Nuclear Power Plant", ("Concrete", "Heavy Modular Frame", "Supercomputer", "Cable", "Alclad Aluminum Sheet")),
         "Miner Mk.1": Building("Miner Mk.1", ("Iron Plate", "Concrete"), PowerInfrastructureLevel.Basic, implicitly_unlocked=True),
         "Miner Mk.2": Building("Miner Mk.2", ("Encased Industrial Beam", "Steel Pipe", "Modular Frame"), PowerInfrastructureLevel.Automated),
@@ -607,6 +613,7 @@ class GameLogic:
 #1.0
         "Converter": Building("Converter", ("Fused Modular Frame", "Cooling System", "Radio Control Unit", "SAM Fluctuator"), PowerInfrastructureLevel.Complex),
         "Quantum Encoder": Building("Quantum Encoder", ("Turbo Motor", "Supercomputer", "Cooling System", "Time Crystal", "Ficsite Trigon"), PowerInfrastructureLevel.Complex),
+        "Alien Power Augmenter": Building("Alien Power Augmenter", ("SAM Fluctuator", "Cable", "Encased Industrial Beam", "Motor", "Computer")),
 #1.0
     }
 
@@ -627,21 +634,30 @@ class GameLogic:
     })
 
     requirement_per_powerlevel: Dict[PowerInfrastructureLevel, Tuple[Recipe, ...]] = {
+        # no need to polute the logic by including higher level recipes based on previus recipes
         PowerInfrastructureLevel.Basic: (
-            Recipe("Biomass Power", "Biomass Burner", ("Solid Biofuel", ), implicitly_unlocked=True),
+            Recipe("Biomass Power (Biomass)", "Biomass Burner", ("Biomass", ), implicitly_unlocked=True),
         ),
         PowerInfrastructureLevel.Automated: (
-            Recipe("Coal Generator Power", "Coal Generator", ("Coal", "Water"), implicitly_unlocked=True),
+            Recipe("Biomass Power (Solid Biofuel)", "Biomass Burner", ("Solid Biofuel", ), implicitly_unlocked=True),
+            #Recipe("Coal Generator Power (Petroleum Coke)", "Coal Generator", ("Petroleum Coke", "Water"), implicitly_unlocked=True),
+            Recipe("Coal Generator Power (Coal)", "Coal Generator", ("Coal", "Water"), implicitly_unlocked=True),
         ),
         PowerInfrastructureLevel.Advanced: (
+            Recipe("Coal Generator Power (Compacted Coal)", "Coal Generator", ("Compacted Coal", "Water"), implicitly_unlocked=True),
             Recipe("Geothermal Generator Power", "Geothermal Generator", implicitly_unlocked=True),
-            #Recipe("Fuel Generator Power (Liquid Biofuel)","Fuel Generator", ("Liquid Biofuel", ), implicitly_unlocked=True),
+            Recipe("Fuel Generator Power (Liquid Biofuel)","Fuel Generator", ("Liquid Biofuel", ), implicitly_unlocked=True),
             Recipe("Fuel Generator Power (Fuel)","Fuel Generator", ("Fuel", ), implicitly_unlocked=True),
+            Recipe("Alien Power Augmenter Power","Alien Power Augmenter", implicitly_unlocked=True),
         ),
         PowerInfrastructureLevel.Complex: (
             Recipe("Fuel Generator Power (Turbofuel)","Fuel Generator", ("Turbofuel", ), implicitly_unlocked=True),
+            #Recipe("Fuel Generator Power (Rocket Fuel)","Fuel Generator", ("Rocket Fuel", ), implicitly_unlocked=True),
+            #Recipe("Fuel Generator Power (Ionized Fuel)","Fuel Generator", ("Ionized Fuel", ), implicitly_unlocked=True),
             Recipe("Nuclear Power Plant Power (Uranium)","Nuclear Power Plant", ("Uranium Fuel Rod", "Water"), implicitly_unlocked=True),
             #Recipe("Nuclear Power Plant Power (Plutonium)","Nuclear Power Plant", ("Plutonium Fuel Rod", "Water"), implicitly_unlocked=True),
+            #Recipe("Nuclear Power Plant Power (Ficsonium)","Nuclear Power Plant", ("Ficsonium Fuel Rod", "Water"), implicitly_unlocked=True),
+            #Recipe("Alien Power Augmenter Power (Alien Power Matrix)","Alien Power Augmenter", ("Alien Power Matrix"), implicitly_unlocked=True),
         )
     }
 
@@ -663,49 +679,52 @@ class GameLogic:
             {"Reinforced Iron Plate":50, "Concrete":200, "Iron Rod":300, "Iron Plate":300, }, # Schematic: Logistics Mk.2 (Schematic_3-2_C)
         ),
         ( # Tier 3
-            {"Reinforced Iron Plate":150, "Rotor":50, "Cable":300, }, # Schematic: Coal Power (Schematic_3-1_C)
-            {"Modular Frame":25, "Rotor":100, "Cable":200, "Iron Rod":400, }, # Schematic: Vehicular Transport (Schematic_3-3_C)
-            {"Modular Frame":50, "Rotor":150, "Concrete":300, "Wire":1000, }, # Schematic: Basic Steel Production (Schematic_3-4_C)
-            {"Reinforced Iron Plate":100, "Cable":200, "Wire":1500, }, # Schematic: Improved Melee Combat (Schematic_4-2_C)
+            {"Reinforced Iron Plate":150, "Rotor":50, "Cable":500, }, # Schematic: Coal Power (Schematic_3-1_C)
+            {"Modular Frame":25, "Rotor":100, "Cable":100, "Iron Plate":400, }, # Schematic: Vehicular Transport (Schematic_3-3_C)
+            {"Modular Frame":50, "Rotor":150, "Concrete":500, "Wire":1000, }, # Schematic: Basic Steel Production (Schematic_3-4_C)
+            {"Reinforced Iron Plate":100, "Iron Rod":600, "Wire":1500, }, # Schematic: Improved Melee Combat (Schematic_4-2_C)
         ),
         ( # Tier 4
-            {"Steel Pipe":200, "Rotor":200, "Wire":1500, "Concrete":300, }, # Schematic: Advanced Steel Production (Schematic_4-1_C)
-            {"Modular Frame":100, "Steel Beam":100, "Wire":1000, }, # Schematic: Expanded Power Infrastructure (Schematic_4-3_C)
-            {"Copper Sheet":300, "Steel Pipe":300, "Encased Industrial Beam":50, }, # Schematic: Hypertubes (Schematic_4-4_C)
             {"Modular Frame":100, "Steel Beam":200, "Cable":500, "Concrete":1000, }, # Schematic: FICSIT Blueprints (Schematic_4-5_C)
-            {"Steel Beam":200, "Steel Pipe":100, "Concrete":500, }, # Schematic: Logistics Mk.3 (Schematic_5-3_C)
+            {"Steel Beam":200, "Steel Pipe":200, "Reinforced Iron Plate":400, }, # Schematic: Logistics Mk.3 (Schematic_5-3_C)
+            {"Steel Pipe":100, "Modular Frame":100, "Rotor":200, "Concrete":500, }, # Schematic: Advanced Steel Production (Schematic_4-1_C)
+            {"Encased Industrial Beam":50, "Steel Beam":100, "Modular Frame":200, "Wire":2000 }, # Schematic: Expanded Power Infrastructure (Schematic_4-3_C)
+            {"Copper Sheet":500, "Steel Pipe":300, "Encased Industrial Beam":50, }, # Schematic: Hypertubes (Schematic_4-4_C)
         ),
         ( # Tier 5
+            {"Motor":50, "Cable":100, "Iron Plate":500 }, # Something jetpack
             {"Motor":50, "Encased Industrial Beam":100, "Steel Pipe":500, "Copper Sheet":500, }, # Schematic: Oil Processing (Schematic_5-1_C)
-            {"Motor":100, "Plastic":200, "Rubber":200, "Cable":1000, }, # Schematic: Industrial Manufacturing (Schematic_5-2_C)
-            {"Heavy Modular Frame":25, "Motor":100, "Plastic":200, "Wire":3000, }, # Schematic: Alternative Fluid Transport (Schematic_5-4_C)
-            {"Rubber":200, "Plastic":100, "Fabric":50, }, # Schematic: Gas Mask (Schematic_6-4_C)
+            {"Rubber":200, "Encased Industrial Beam":300, "Modular Frame":400, }, 
+            {"Plastic":200, "Steel Beam":400, "Copper Sheet":1000, }, # Schematic: Alternative Fluid Transport (Schematic_5-4_C)
+            {"Motor":100, "Encased Industrial Beam":100, "Plastic":200, "Rubber":200, }, # Schematic: Industrial Manufacturing (Schematic_5-2_C)
         ),
         ( # Tier 6
-            {"Heavy Modular Frame":50, "Computer":100, "Encased Industrial Beam":200, "Rubber":400, }, # Schematic: Logistics Mk.4 (Schematic_6-1_C)
-            {"Motor":50, "Plastic":100, "Rubber":100, "Packaged Fuel":50 }, # Schematic: Jetpack (Schematic_6-2_C)
-            {"Computer":50, "Heavy Modular Frame":100, "Steel Beam":500, "Steel Pipe":600, }, # Schematic: Monorail Train Technology (Schematic_6-3_C)
-            {"Copper Sheet":1000, "Plastic":400, "Rubber":400, "Heavy Modular Frame":50, }, # Schematic: Pipeline Engineering Mk.2 (Schematic_6-5_C)
+            {"Motor":200, "Modular Frame":200, "Plastic":400, "Cable":1000, }, # Schematic: Industrial Manufacturing (Schematic_5-2_C)
+            {"Motor":250, "Encased Industrial Beam":500, "Steel Pipe":1000, "Steel Beam":1000, } # Schematic: Monorail Train Technology (Schematic_6-3_C)
+            {"Computer":50, "Steel Pipe":4000, "Copper Sheet":1000, }, 
+            {"Heavy Modular Frame":50, "Plastic":1000, "Rubber":1000, }, # Schematic: Pipeline Engineering Mk.2 (Schematic_6-5_C)
+            {"Heavy Modular Frame":50, "Computer":100, "Rubber":400, "Concrete": 1000, }, 
         ),
         ( # Tier 7
-            {"Computer":50, "Heavy Modular Frame":100, "Motor":200, "Rubber":500, }, # Schematic: Bauxite Refinement (Schematic_7-1_C)
-            {"Alclad Aluminum Sheet":100, "Encased Industrial Beam":200, "Reinforced Iron Plate":300, }, # Schematic: Logistics Mk.5 (Schematic_7-2_C)
-            {"Aluminum Casing":50, "Quickwire":500, "Gas Filter":50, }, # Schematic: Hazmat Suit (Schematic_7-3_C)
-            {"Radio Control Unit":50, "Alclad Aluminum Sheet":100, "Aluminum Casing":200, "Motor":300, }, # Schematic: Aeronautical Engineering (Schematic_7-4_C)
-            {"Motor":200, "Heavy Modular Frame":100, "Computer":100, "Alclad Aluminum Sheet":200, }, # Schematic: Hover Pack (Schematic_8-3_C)
+            {"Computer":100, "Heavy Modular Frame":100, "Motor":250, "Rubber":500, }, # Schematic: Bauxite Refinement (Schematic_7-1_C)
+            {"Alclad Aluminum Sheet":100, "Heavy Modular Frame":100, "Computer":100, "Motor":250, }, # Schematic: Hover Pack (Schematic_8-3_C)
+            {"Alclad Aluminum Sheet":200, "Encased Industrial Beam":400, "Reinforced Iron Plate":600, }, # Schematic: Logistics Mk.5 (Schematic_7-2_C)
+            {"Gas Filter":50, "Aluminum Casing":100, "Quickwire":500, }, # Schematic: Hazmat Suit (Schematic_7-3_C)
+            {"Alclad Aluminum Sheet":200, "Aluminum Casing":400, "Computer":200, "Plastic": 1000, }, # Schematic: Aeronautical Engineering (Schematic_7-4_C)
         ),
         ( # Tier 8
+            {"Radio Control Unit": 50, "Alclad Aluminum Sheet":100, "Aluminum Casing":200, "Motor": 300, }, # Schematic: Aeronautical Engineering (Schematic_7-4_C)
             {"Supercomputer":50, "Heavy Modular Frame":200, "Cable":1000, "Concrete":2000, }, # Schematic: Nuclear Power (Schematic_8-1_C)
-            {"Radio Control Unit":50, "Aluminum Casing":100, "Alclad Aluminum Sheet":200, "Wire":3000, }, # Schematic: Advanced Aluminum Production (Schematic_8-2_C)
+            {"Radio Control Unit":50, "Aluminum Casing":200, "Alclad Aluminum Sheet":400, "Wire":3000, }, # Schematic: Advanced Aluminum Production (Schematic_8-2_C)
             {"Fused Modular Frame":50, "Supercomputer":100, "Steel Pipe":1000, }, # Schematic: Leading-edge Production (Schematic_8-4_C)
-            {"Electromagnetic Control Rod":400, "Cooling System":400, "Fused Modular Frame":200, "Turbo Motor":100, }, # Schematic: Particle Enrichment (Schematic_8-5_C)
+            {"Turbo Motor":50, "Fused Modular Frame":100,  "Cooling System":200, "Quickwire":2500, }, # Schematic: Particle Enrichment (Schematic_8-5_C)
         ),
         ( # Tier 9
-            {"Fused Modular Frame":100, "Radio Control Unit":250, "Cooling System":500 },
-            {"Time Crystal":50, "Ficsite Trigon":100, "Turbo Motor":200, "Turbo Motor":400 },
-            {"Neural-Quantum Processor":100, "Time Crystal":250, "Ficsite Trigon":500, "Fused Modular Frame":500 }, 
-            {"Superposition Oscillator":100, "Turbo Motor":250, "Radio Control Unit":500, "SAM Fluctuator":1000 },
-            {"Time Crystal":250, "Ficsite Trigon":250, "Alclad Aluminum Sheet":500, "Iron Plate":10000 },
+            {"Fused Modular Frame":100, "Radio Control Unit":250, "Cooling System":500, },
+            {"Time Crystal":50, "Ficsite Trigon":100, "Turbo Motor":200, "Supercomputer":400, },
+            {"Neural-Quantum Processor":100, "Time Crystal":250, "Ficsite Trigon":500, "Fused Modular Frame":500, }, 
+            {"Superposition Oscillator":100, "Turbo Motor":250, "Radio Control Unit":500, "SAM Fluctuator":1000, },
+            {"Time Crystal":250, "Ficsite Trigon":250, "Alclad Aluminum Sheet":500, "Iron Plate":10000, },
         ),
     )
 

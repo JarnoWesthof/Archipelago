@@ -40,9 +40,16 @@ class SatisfactoryWorld(World):
         self.state_logic = StateLogic(self.player, self.options)
         self.items = Items(self.player, self.game_logic, self.random, self.options)
 
-        if self.options.final_elevator_tier.value <= 0 and self.options.final_resource_sink_points.value <= 0:
-                raise Exception("""Satisfactory: player {} needs to choose a goal,
-                    both FinalElevatorTier and FinalResourceSinkPoints are set to off"""
+        if not self.options.goal_selection.value:
+            raise Exception("""Satisfactory: player {} needs to choose a goal, the option goal_selection is empty"""
+                .format(self.multiworld.player_name[self.player]))
+        if "Space elevator tier" in self.options.goal_selection and self.options.final_elevator_tier.value <= 0:
+                raise Exception("""Satisfactory: player {} selected "Space elevator tier" as their goal
+                    but the option final_elevator_tier is not properly set"""
+                    .format(self.multiworld.player_name[self.player]))
+        if "Resource sink points" in self.options.goal_selection and self.options.final_resource_sink_points.value <= 0:
+                raise Exception("""Satisfactory: player {} selected "Space elevator tier" as their goal
+                    but the option final_resource_sink_points is not properly set"""
                     .format(self.multiworld.player_name[self.player]))
 
         if self.options.mam_logic_placement.value == Placement.starting_inventory:
@@ -80,23 +87,11 @@ class SatisfactoryWorld(World):
 
 
     def set_rules(self) -> None:
-        resource_sink_goal: bool = \
-            self.options.goal_selection.value == self.options.goal_selection.option_resource_sink_points \
-            or self.options.goal_selection.value == self.options.goal_selection.option_both_goals \
-            or self.options.goal_selection.value == self.options.goal_selection.option_either_goal
-        elevator_goal: bool = \
-            self.options.goal_selection.value == self.options.goal_selection.option_space_elevator_packages \
-            or self.options.goal_selection.value == self.options.goal_selection.option_both_goals \
-            or self.options.goal_selection.value == self.options.goal_selection.option_either_goal
+        resource_sink_goal: bool = "Resource sink points" in self.options.goal_selection
 
         last_elevator_tier: int = \
             len(self.game_logic.space_elevator_tiers) if resource_sink_goal else self.options.final_elevator_tier.value
         
-        if resource_sink_goal or not elevator_goal:
-            last_elevator_tier = len(self.game_logic.space_elevator_tiers)
-        else:
-            self.options.final_elevator_tier.value
-
         required_parts: Set[str] = set(self.game_logic.space_elevator_tiers[last_elevator_tier - 1].keys())
 
         if resource_sink_goal:

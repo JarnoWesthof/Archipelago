@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Any, Tuple, ClassVar, cast
 from enum import IntEnum
 from Options import PerGameCommonOptions, DeathLink, AssembleOptions, Visibility
-from Options import Range, Toggle, OptionList, StartInventoryPool, NamedRange, Choice
+from Options import Range, Toggle, OptionSet, StartInventoryPool, NamedRange, Choice
 
 class Placement(IntEnum):
     starting_inventory = 0
@@ -90,12 +90,13 @@ class ResourceSinkPoints(NamedRange):
     }
 
 class HardDriveProgressionLimit(Range):
-    """How many Hard-drive locations can contain progression items.
-    Hard-drive locations above this threshold cannot contain progression but can still be useful"""
+    """How many Hard-drive scans can contain progression items.
+    Hard-drive scans above this threshold cannot contain progression but can still be useful"""
     display_name = "Max Hard-drive Progression"
     default = 0
     range_start = 0
     range_end = 100
+    visibility = Visibility.none # its WIP
 
 class FreeSampleEquipment(Range):
     """How many free sample items of Equipment items should be given when they are unlocked.
@@ -165,7 +166,7 @@ class TrapSelectionPreset(ChoiceMap):
     }
     default="Normal"
 
-class TrapSelectionOverride(OptionList):
+class TrapSelectionOverride(OptionSet):
     """Precise list of traps that may be in the item pool to find. If you select anything with this option it will be used instead of the 'Trap Presets' setting."""
     display_name = "Trap Override"
     valid_keys = {
@@ -197,7 +198,7 @@ class TrapSelectionOverride(OptionList):
         "Bundle: Plutonium Waste",
         "Bundle: Non-fissile Uranium",
     }
-    default = []
+    default = {}
 
 class EnergyLink(Toggle):
     """Allow sending energy to other worlds. TODO% of the energy is lost in the transfer."""
@@ -271,15 +272,17 @@ class StartingInventoryPreset(ChoiceMap):
     default = "Archipelago"
 
 # options.py
-class GoalSelection(Choice):
-    """What will be your goal(s)? """
-
-    display_name = "Selected Goals"
-    option_space_elevator_packages = 1
-    option_resource_sink_points = 2
-    option_both_goals = 3
-    option_either_goal = 4
-    default = option_space_elevator_packages
+class GoalSelection(OptionSet):
+    """What will be your goal(s)?
+    Selecting "Complete 1 Goal only" means your game will complete with either goal, otherwise all selected goals must be completed
+    """
+    display_name = "Select your Goals"
+    valid_keys = {
+        "Space elevator tier",
+        "Resource sink points",
+        "Complete 1 Goal only"
+    }
+    default = {"Space elevator tier"}
 
 class ExperimentalGeneration(Toggle):
     """Attempts to only mark recipes as progression if they are on your path to victory
@@ -290,9 +293,8 @@ class ExperimentalGeneration(Toggle):
 @dataclass
 class SatisfactoryOptions(PerGameCommonOptions):
     goal_selection: GoalSelection
-    final_elevator_tier: ElevatorTier # TODO rename to "final_elevator_package" to avoid confusion over what the value means (the range 0-4 is not the same as the range of tiers 0-8)
+    final_elevator_package: ElevatorTier
     final_resource_sink_points: ResourceSinkPoints
-    # tech_tree_information: TechTreeInformation # TODO: NYI
     hard_drive_progression_limit: HardDriveProgressionLimit
     free_sample_equipment: FreeSampleEquipment
     free_sample_buildings: FreeSampleBuildings
