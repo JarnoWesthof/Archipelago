@@ -191,8 +191,8 @@ class GameLogic:
         # Special Items
         "Uranium Waste": (
             Recipe("Uranium Waste", "Nuclear Power Plant", ("Uranium Fuel Rod", "Water"), implicitly_unlocked=True), ),
-        "Plutonium Waste": (
-            Recipe("Plutonium Waste", "Nuclear Power Plant", ("Plutonium Fuel Rod", "Water"), implicitly_unlocked=True), ),
+        #"Plutonium Waste": (
+        #    Recipe("Plutonium Waste", "Nuclear Power Plant", ("Plutonium Fuel Rod", "Water"), implicitly_unlocked=True), ),
 
         # Recipes
         "Reinforced Iron Plate": (
@@ -218,10 +218,11 @@ class GameLogic:
         "Iron Plate": (
             Recipe("Iron Plate", "Constructor", ("Iron Ingot", ), handcraftable=True, implicitly_unlocked=True),
             Recipe("Coated Iron Plate", "Assembler", ("Iron Ingot", "Plastic"), minimal_belt_speed=2),
-            Recipe("Steel Coated Plate", "Assembler", ("Steel Ingot", "Plastic"))),
+            Recipe("Steel Cast Plate", "Foundry", ("Iron Ingot", "Steel Ingot"))),
         "Iron Rod": (
             Recipe("Iron Rod", "Constructor", ("Iron Ingot", ), handcraftable=True, implicitly_unlocked=True),
-            Recipe("Steel Rod", "Constructor", ("Steel Ingot", ))),
+            Recipe("Steel Rod", "Constructor", ("Steel Ingot", )),
+            Recipe("Aluminum Rod", "Constructor", ("Aluminum Ingot", ))),
         "Screw": (
             Recipe("Screw", "Constructor", ("Iron Rod", ), handcraftable=True, implicitly_unlocked=True),
             Recipe("Cast Screw", "Constructor", ("Iron Ingot", )),
@@ -243,16 +244,20 @@ class GameLogic:
             Recipe("Copper Sheet", "Constructor", ("Copper Ingot", ), handcraftable=True),
             Recipe("Steamed Copper Sheet", "Refinery", ("Copper Ingot", "Water"))),
         "Steel Pipe": (
-            Recipe("Steel Pipe", "Constructor", ("Steel Ingot", ), handcraftable=True), ),
+            Recipe("Steel Pipe", "Constructor", ("Steel Ingot", ), handcraftable=True),
+            Recipe("Iron Pipe", "Constructor", ("Iron Ingot", ), minimal_belt_speed=2),
+            Recipe("Molded Steel Pipe", "Foundry", ("Steel Ingot", "Concrete"))),
         "Steel Beam": (
-            Recipe("Steel Beam", "Constructor", ("Steel Ingot", ), handcraftable=True), ),
+            Recipe("Steel Beam", "Constructor", ("Steel Ingot", ), handcraftable=True),
+            Recipe("Aluminum Beam", "Constructor", ("Aluminum Ingot", )),
+            Recipe("Molded Beam", "Foundry", ("Steel Ingot", "Concrete"), minimal_belt_speed=2)),
         "Heavy Oil Residue": (
             Recipe("Heavy Oil Residue", "Refinery", ("Crude Oil", ), additional_outputs=("Polymer Resin", )),
             Recipe("Plastic", "Refinery", ("Crude Oil", ), additional_outputs=("Plastic", )),
             Recipe("Rubber", "Refinery", ("Crude Oil", ), additional_outputs=("Rubber", )),
             Recipe("Polymer Resin", "Refinery", ("Crude Oil", ), additional_outputs=("Polymer Resin", ), minimal_belt_speed=3)),
         "Polymer Resin": (
-            Recipe("Polymer Resin", "Refinery", ("Crude Oil", ), additional_outputs=("Heavy Oil Residue", )),
+            Recipe("Polymer Resin", "Refinery", ("Crude Oil", ), additional_outputs=("Heavy Oil Residue", ), minimal_belt_speed=2),
             Recipe("Fuel", "Refinery", ("Crude Oil", ), additional_outputs=("Fuel", )),
             Recipe("Heavy Oil Residue", "Refinery", ("Crude Oil", ), additional_outputs=("Heavy Oil Residue", ), minimal_belt_speed=3)),
         "Fuel": (
@@ -267,14 +272,19 @@ class GameLogic:
         "Silica": (
             Recipe("Silica", "Constructor", ("Raw Quartz", ), handcraftable=True),
             Recipe("Alumina Solution", "Refinery", ("Bauxite", "Water"), additional_outputs=("Alumina Solution", ), minimal_belt_speed=2),
-            Recipe("Cheap Silica", "Assembler", ("Raw Quartz", "Limestone"))),
+            Recipe("Cheap Silica", "Assembler", ("Raw Quartz", "Limestone")),
+            Recipe("Distilled Silica", "Blender", ("Dissolved Silica", "Limestone", "Water"), additional_outputs=("Water", ))),
         "Quartz Crystal": (
             Recipe("Quartz Crystal", "Constructor", ("Raw Quartz", ), handcraftable=True),
-            Recipe("Pure Quartz Crystal", "Refinery", ("Raw Quartz", "Water"), minimal_belt_speed=2)),
+            Recipe("Pure Quartz Crystal", "Refinery", ("Raw Quartz", "Water"), minimal_belt_speed=2),
+            Recipe("Fused Quartz Crystal", "Foundry", ("Raw Quartz", "Coal"), minimal_belt_speed=2),
+            Recipe("Quartz Purification", "Refinery", ("Raw Quartz", "Nitric Acid"), additional_outputs=("Dissolved Silica", ), minimal_belt_speed=2)),
         "Iron Ingot": (
             Recipe("Iron Ingot", "Smelter", ("Iron Ore", ), handcraftable=True, implicitly_unlocked=True),
             Recipe("Pure Iron Ingot", "Refinery", ("Iron Ore", "Water"), minimal_belt_speed=2),
-            Recipe("Iron Alloy Ingot", "Foundry", ("Iron Ore", "Copper Ore"))),
+            Recipe("Iron Alloy Ingot", "Foundry", ("Iron Ore", "Copper Ore")),
+            Recipe("Basic Iron Ingot", "Foundry", ("Iron Ore", "Limestone")),
+            Recipe("Leached Iron ingot", "Refinery", ("Iron Ore", "Sulfuric Acid"), minimal_belt_speed=2)),
         "Steel Ingot": (
             Recipe("Steel Ingot", "Foundry", ("Iron Ore", "Coal"), handcraftable=True),
             Recipe("Coke Steel Ingot", "Foundry", ("Iron Ore", "Petroleum Coke"), minimal_belt_speed=2),
@@ -283,10 +293,14 @@ class GameLogic:
         "Copper Ingot": (
             Recipe("Copper Ingot", "Smelter", ("Copper Ore", ), handcraftable=True, implicitly_unlocked=True),
             Recipe("Copper Alloy Ingot", "Foundry", ("Copper Ore", "Iron Ore"), minimal_belt_speed=2),
-            Recipe("Pure Copper Ingot", "Refinery", ("Copper Ore", "Water"))),
+            Recipe("Pure Copper Ingot", "Refinery", ("Copper Ore", "Water")),
+            Recipe("Leached Copper Ingot", "Refinery", ("Copper Ore", "Sulfuric Acid"), minimal_belt_speed=2),
+            Recipe("Tempered Copper Ingot", "Foundry", ("Copper Ore", "Petroleum Coke"))),
         "Caterium Ingot": (
             Recipe("Caterium Ingot", "Smelter", ("Caterium Ore", ), handcraftable=True),
-            Recipe("Pure Caterium Ingot", "Refinery", ("Caterium Ore", "Water"))),
+            Recipe("Pure Caterium Ingot", "Refinery", ("Caterium Ore", "Water")),
+            Recipe("Leached Caterium Ingot", "Refinery", ("Caterium Ore", "Sulfuric Acid")),
+            Recipe("Tempered Caterium Ingot", "Foundry", ("Caterium Ore", "Petroleum Coke"))),
         "Petroleum Coke": (
             Recipe("Petroleum Coke", "Refinery", ("Heavy Oil Residue", ), minimal_belt_speed=2), ),
         "Compacted Coal": (
@@ -319,7 +333,8 @@ class GameLogic:
             Recipe("Crystal Oscillator", "Manufacturer", ("Quartz Crystal", "Cable", "Reinforced Iron Plate"), handcraftable=True),
             Recipe("Insulated Crystal Oscillator", "Manufacturer", ("Quartz Crystal", "Rubber", "AI Limiter"))),
         "AI Limiter": (
-            Recipe("AI Limiter", "Assembler", ("Copper Sheet", "Quickwire"), minimal_belt_speed=2, handcraftable=True), ),
+            Recipe("AI Limiter", "Assembler", ("Copper Sheet", "Quickwire"), minimal_belt_speed=2, handcraftable=True),
+            Recipe("Plastic AI Limiter", "Assembler", ("Quickwire", "Plastic"), minimal_belt_speed=2)),
         "Electromagnetic Control Rod": (
             Recipe("Electromagnetic Control Rod", "Assembler", ("Stator", "AI Limiter"), handcraftable=True),
             Recipe("Electromagnetic Connection Rod", "Assembler", ("Stator", "High-Speed Connector"))),
@@ -347,7 +362,7 @@ class GameLogic:
             Recipe("Sloppy Alumina", "Refinery", ("Bauxite", "Water"), minimal_belt_speed=3)),
         "Aluminum Scrap": (
             Recipe("Aluminum Scrap", "Refinery", ("Alumina Solution", "Coal"), additional_outputs=("Water", ), minimal_belt_speed=4),
-            Recipe("Electrode - Aluminum Scrap", "Refinery", ("Alumina Solution", "Petroleum Coke"), additional_outputs=("Water", ), minimal_belt_speed=4),  
+            Recipe("Electrode Aluminum Scrap", "Refinery", ("Alumina Solution", "Petroleum Coke"), additional_outputs=("Water", ), minimal_belt_speed=4),  
             Recipe("Instant Scrap", "Blender", ("Bauxite", "Coal", "Sulfuric Acid", "Water"), additional_outputs=("Water", ), minimal_belt_speed=3)),
         "Aluminum Ingot": (
             Recipe("Aluminum Ingot", "Foundry", ("Aluminum Scrap", "Silica"), minimal_belt_speed=2, handcraftable=True), 
@@ -393,17 +408,17 @@ class GameLogic:
         "Uranium Fuel Rod": (
             Recipe("Uranium Fuel Rod", "Manufacturer", ("Encased Uranium Cell", "Encased Industrial Beam", "Electromagnetic Control Rod")), 
             Recipe("Uranium Fuel Unit", "Manufacturer", ("Encased Uranium Cell", "Electromagnetic Control Rod", "Crystal Oscillator", "Rotor"))),
-        "Non-fissile Uranium": (
-            Recipe("Non-fissile Uranium", "Blender", ("Uranium Waste", "Silica", "Nitric Acid", "Sulfuric Acid"), additional_outputs=("Water", )), 
-            Recipe("Fertile Uranium", "Blender", ("Uranium", "Uranium Waste", "Nitric Acid", "Sulfuric Acid"), additional_outputs=("Water", ), minimal_belt_speed=2)),
-        "Plutonium Pellet": (
-            Recipe("Plutonium Pellet", "Particle Accelerator", ("Non-fissile Uranium", "Uranium Waste"), minimal_belt_speed=2), ),
-        "Encased Plutonium Cell": (
-            Recipe("Encased Plutonium Cell", "Assembler", ("Plutonium Pellet", "Concrete")), 
-            Recipe("Instant Plutonium Cell", "Particle Accelerator", ("Non-fissile Uranium", "Aluminum Casing"), minimal_belt_speed=2)),
-        "Plutonium Fuel Rod": (
-            Recipe("Plutonium Fuel Rod", "Manufacturer", ("Encased Plutonium Cell", "Steel Beam", "Electromagnetic Control Rod", "Heat Sink")), 
-            Recipe("Plutonium Fuel Unit", "Assembler", ("Encased Plutonium Cell", "Pressure Conversion Cube"))),
+        #"Non-fissile Uranium": (
+        #    Recipe("Non-fissile Uranium", "Blender", ("Uranium Waste", "Silica", "Nitric Acid", "Sulfuric Acid"), additional_outputs=("Water", )), 
+        #    Recipe("Fertile Uranium", "Blender", ("Uranium", "Uranium Waste", "Nitric Acid", "Sulfuric Acid"), additional_outputs=("Water", ), minimal_belt_speed=2)),
+        #"Plutonium Pellet": (
+        #    Recipe("Plutonium Pellet", "Particle Accelerator", ("Non-fissile Uranium", "Uranium Waste"), minimal_belt_speed=2), ),
+        #"Encased Plutonium Cell": (
+        #    Recipe("Encased Plutonium Cell", "Assembler", ("Plutonium Pellet", "Concrete")), 
+        #    Recipe("Instant Plutonium Cell", "Particle Accelerator", ("Non-fissile Uranium", "Aluminum Casing"), minimal_belt_speed=2)),
+        #"Plutonium Fuel Rod": (
+        #    Recipe("Plutonium Fuel Rod", "Manufacturer", ("Encased Plutonium Cell", "Steel Beam", "Electromagnetic Control Rod", "Heat Sink")), 
+        #    Recipe("Plutonium Fuel Unit", "Assembler", ("Encased Plutonium Cell", "Pressure Conversion Cube"))),
         "Gas Filter": (
             Recipe("Gas Filter", "Manufacturer", ("Coal", "Rubber", "Fabric"), handcraftable=True), ),
         "Iodine Infused Filter": (
@@ -494,13 +509,13 @@ class GameLogic:
             Recipe("Xeno-Zapper", "Equipment Workshop", ("Iron Rod", "Reinforced Iron Plate", "Cable", "Wire"), handcraftable=True, implicitly_unlocked=True), ),
 
 #1.0
-        #"Rocket Fuel": (
-        #    Recipe("Rocket Fuel", "Blender", ("Turbofuel", "Nitric Acid"), additional_outputs=("Compacted Coal", )),
-        #    Recipe("Nitro Rocket Fuel", "Blender", ("Fuel", "Nitrogen Gas", "Sulfur", "Coal"), minimal_belt_speed=2, additional_outputs=("Compacted Coal", ))),
+        "Rocket Fuel": (
+            Recipe("Rocket Fuel", "Blender", ("Turbofuel", "Nitric Acid"), additional_outputs=("Compacted Coal", )),
+            Recipe("Nitro Rocket Fuel", "Blender", ("Fuel", "Nitrogen Gas", "Sulfur", "Coal"), minimal_belt_speed=2, additional_outputs=("Compacted Coal", ))),
         #"Ionized Fuel": (
         #    Recipe("Ionized Fuel", "Refinery", ("Rocket Fuel", "Power Shard"), additional_outputs=("Compacted Coal", )), ),
-        #"Packaged Rocket Fuel": (
-        #    Recipe("Packaged Rocket Fuel", "Packager", ("Rocket Fuel", "Empty Fluid Tank")), ),
+        "Packaged Rocket Fuel": (
+            Recipe("Packaged Rocket Fuel", "Packager", ("Rocket Fuel", "Empty Fluid Tank")), ),
         #"Packaged Ionized Fuel": (
         #    Recipe("Packaged Ionized Fuel", "Packager", ("Ionized Fuel", "Empty Fluid Tank")), ),
         "Diamonds": (
@@ -536,8 +551,7 @@ class GameLogic:
             Recipe("Biochemical Sculptor", "Blender", ("Assembly Director System", "Ficsite Trigon", "Water")), ),
         "Ballistic Warp Drive": (
             Recipe("Ballistic Warp Drive", "Manufacturer", ("Thermal Propulsion Rocket", "Singularity Cell", "Superposition Oscillator", "Dark Matter Crystal")), ),
-        #"Ficsonium": (
-        #    Recipe("Ficsonium", "Particle Accelerator", ("Plutonium Waste", "Singularity Cell", "Dark Matter Residue")), ),
+
         # All Quantum Encoder recipes have `Dark Matter Residue` set as an input, this hack makes the logic make sure you can get rid of it
         "Dark Matter Residue": (
             #Recipe("Ficsonium", "Particle Accelerator", ("Plutonium Waste", "Singularity Cell"), additional_outputs=("Ficsonium", )),
@@ -550,15 +564,7 @@ class GameLogic:
             Recipe("Neural-Quantum Processor", "Quantum Encoder", ("Dark Matter Residue", "Excited Photonic Matter", "Time Crystal", "Supercomputer", "Ficsite Trigon")), ),
         "AI Expansion Server": (
             Recipe("AI Expansion Server", "Quantum Encoder", ("Dark Matter Residue", "Excited Photonic Matter", "Magnetic Field Generator", "Neural-Quantum Processor", "Superposition Oscillator")), ),
-        #"Ficsonium Fuel Rod": (
-        #    Recipe("Ficsonium Fuel Rod", "Quantum Encoder", ("Dark Matter Residue", "Excited Photonic Matter", "Ficsonium", "Electromagnetic Control Rod", "Ficsite Trigon")), ),
-        #"Alien Power Matrix": ( # Might not be needed as nothing requires `Alien Power Matrix` as an input
-        #    Recipe("Alien Power Matrix", "Quantum Encoder", ("Dark Matter Residue", "Excited Photonic Matter", "SAM Fluctuator", "Power Shard", "Superposition Oscillator")), ),
-
-            # TODO add leached recipes
-            # TODO add foundry molded recipes
-            # add disolved silica
-            # todo MAM nodes
+        ###
 #1.0
 
         # TODO transport types aren't currently in logic
@@ -602,7 +608,7 @@ class GameLogic:
         "Conveyor Mk.5": Building("Conveyor Mk.5", ("Alclad Aluminum Sheet", "Iron Plate", "Iron Rod", "Concrete"), can_produce=False),
         "Conveyor Mk.6": Building("Conveyor Mk.6", ("Ficsite Trigon", "Time Crystal", "Iron Plate", "Iron Rod", "Concrete"), can_produce=False),
         "Power Pole Mk.1": Building("Power Pole Mk.1", ("Iron Plate", "Iron Rod", "Concrete"), can_produce=False, implicitly_unlocked=True),
-        # higher level power poles arent in logic
+        # higher level power poles arent in logic (yet)
         #"Power Pole Mk.2": Building("Power Pole Mk.2", ("Quickwire", "Iron Rod", "Concrete"), False),
         #"Power Pole Mk.3": Building("Power Pole Mk.3", ("High-Speed Connector", "Steel Pipe", "Rubber"), False),
         "Power Storage": Building("Power Storage", ("Wire", "Modular Frame", "Stator"), can_produce=False),
@@ -740,7 +746,7 @@ class GameLogic:
     # Do not regenerate as format got changed
     # Regenerate via /Script/Engine.Blueprint'/Archipelago/Debug/CC_BuildMamData.CC_BuildMamData'
     man_trees: Dict[str, MamTree] = {
-        "Alien Organisms": MamTree(("Hog Remains", "Plasma Spitter Remains"), ( # Alien Organisms (BPD_ResearchTree_AlienOrganisms_C)
+        "Alien Organisms": MamTree(("Hog Remains", "Plasma Spitter Remains", "Stinger Remains", "Hatcher Remains"), ( # Alien Organisms (BPD_ResearchTree_AlienOrganisms_C)
             MamNode("Inflated Pocket Dimension", {"Alien Protein":3,"Cable":1000,}, depends_on=("Bio-Organic Properties", )), #(Research_AOrgans_3_C)
             MamNode("Hostile Organism Detection", {"Alien DNA Capsule":10,"Crystal Oscillator":5,"High-Speed Connector":5,}, depends_on=("Bio-Organic Properties", )), #(Research_AOrganisms_2_C)
             MamNode("Expanded Toolbelt", {"Alien DNA Capsule":5,"Steel Beam":500,}, depends_on=("Inflated Pocket Dimension", )), #(Research_ACarapace_3_C)
@@ -753,6 +759,29 @@ class GameLogic:
             MamNode("Protein Inhaler", {"Alien Protein":2,"Beryl Nut":20,"Rotor":50,}, depends_on=("Bio-Organic Properties", )), #(Research_AOrgans_2_C)
             MamNode("The Rebar Gun", {"Rotor":25,"Reinforced Iron Plate":50,"Screw":500,}, depends_on=("Structural Analysis", )), #(Research_ACarapace_2_C)
         )),
+        # 1.0
+        "Alien Technology": MamTree(("SAM", "Mercer Sphere", "Somersloop"), (
+            MamNode("SAM Analysis", {"SAM":10,}, depends_on=()),
+            MamNode("SAM Reanimation", {"SAM":20,}, depends_on=("SAM Analysis")),
+            MamNode("SAM Fluctuator", {"Reanimated SAM":10,"Steel Pipe":100,"Wire":200,}, depends_on=("SAM Reanimation")),
+            MamNode("Mercer Sphere Analysis", {"Mercer Sphere":1,}, depends_on=()),
+            MamNode("Dimensional Depot", {"Mercer Sphere":1,"SAM Fluctuator":11,}, depends_on=("Mercer Sphere Analysis", "SAM Fluctuator")),
+            MamNode("Manual Depot Uploader", {"Mercer Sphere":3,"Computer":17,"SAM Fluctuator":19,}, depends_on=("Dimensional Depot")),
+            MamNode("Depot Expansion (200%)", {"Mercer Sphere":3,"SAM Fluctuator":47,}, depends_on=("Dimensional Depot")),
+            MamNode("Depot Expansion (300%)", {"Mercer Sphere":7,"SAM Fluctuator":103,}, depends_on=("Depot Expansion (200%)")),
+            MamNode("Depot Expansion (400%)", {"Mercer Sphere":13,"SAM Fluctuator":151,}, depends_on=("Depot Expansion (300%)")),
+            MamNode("Depot Expansion (500%)", {"Mercer Sphere":23,"SAM Fluctuator":199,}, depends_on=("Depot Expansion (400%)")),
+            MamNode("Upload Upgrade: 30/min", {"Mercer Sphere":3,"SAM Fluctuator":47,}, depends_on=("Dimensional Depot")),
+            MamNode("Upload Upgrade: 60/min", {"Mercer Sphere":7,"SAM Fluctuator":103,}, depends_on=("Upload Upgrade: 30/min")),
+            MamNode("Upload Upgrade: 120/min", {"Mercer Sphere":13,"SAM Fluctuator":151,}, depends_on=("Upload Upgrade: 60/min")),
+            MamNode("Upload Upgrade: 240/min", {"Mercer Sphere":23,"SAM Fluctuator":199,}, depends_on=("Upload Upgrade: 120/min")),
+            MamNode("Somersloop Analysis", {"Somersloop":1,}, depends_on=()),
+            MamNode("Alien Energy Harvesting", {"SAM Fluctuator":10,}, depends_on=("Somersloop Analysis", "SAM Fluctuator")),
+            MamNode("Production Amplifier", {"Somersloop":1,"SAM Fluctuator":100,"Circuit Board":50,}, depends_on=("Alien Energy Harvesting")),
+            MamNode("Power Augmenter", {"Somersloop":1,"SAM Fluctuator":100,"Computer":50,}, depends_on=("Alien Energy Harvesting")),
+            MamNode("Alien Power Matrix", {"Singularity Cell":50,"Power Shard":100,"SAM Fluctuator":500}, depends_on=("Power Augmenter")),
+        )),
+        # 1.0
         "Caterium": MamTree(("Caterium Ore", ), ( # Caterium (BPD_ResearchTree_Caterium_C)
             MamNode("Caterium Electronics", {"Quickwire":100,}, depends_on=("Quickwire", )), #(Research_Caterium_3_C)
             MamNode("Bullet Guidance System", {"High-Speed Connector":10,"Rifle Ammo":500,}, depends_on=("High-Speed Connector", )), #(Research_Caterium_6_3_C)
@@ -761,16 +790,16 @@ class GameLogic:
             MamNode("Caterium Ingots", {"Caterium Ore":50,}, depends_on=("Caterium", )), #(Research_Caterium_1_C)
             MamNode("Quickwire", {"Caterium Ingot":50,}, depends_on=("Caterium Ingots", )), #(Research_Caterium_2_C)
             MamNode("Power Switch", {"Steel Beam":100,"AI Limiter":50,}, depends_on=("AI Limiter", )), #(Research_Caterium_4_1_2_C)
+            MamNode("Priority Power Switch", {"High-Speed Connector":25,"Quickwire":500,}, depends_on=("High-Speed Connector", )), # 1.0
             MamNode("Power Poles Mk.2", {"Quickwire":300,}, depends_on=("Caterium Electronics", )), #(Research_Caterium_4_2_C)
             MamNode("AI Limiter", {"Quickwire":200,"Copper Sheet":50,}, depends_on=("Caterium Electronics", )), #(Research_Caterium_4_1_C)
             MamNode("Smart Splitter", {"AI Limiter":10,"Reinforced Iron Plate":50,}, depends_on=("AI Limiter", )), #(Research_Caterium_4_1_1_C)
-            MamNode("Programmable Splitter", {"Supercomputer":50,"Heavy Modular Frame":50,}, depends_on=("Supercomputer", )), #(Research_Caterium_7_1_C)
-            MamNode("Supercomputer", {"AI Limiter":50,"High-Speed Connector":50,"Computer":50,}, depends_on=("AI Limiter", "High-Speed Connector")), #(Research_Caterium_6_1_C)
+            MamNode("Programmable Splitter", {"AI Limiter":100, "Computer":50,"Heavy Modular Frame":50,}, depends_on=("AI Limiter", "High-Speed Connector")), #(Research_Caterium_7_1_C) # 1.0
             MamNode("Zipline", {"Quickwire":100,"Cable":50,}, depends_on=("Quickwire", )), #(Research_Caterium_2_1_C)
-            MamNode("Geothermal Generator", {"Supercomputer":50,"Heavy Modular Frame":50,"Rubber":300,}, depends_on=("Supercomputer", )), #(Research_Caterium_7_2_C)
+            MamNode("Geothermal Generator", {"Supercomputer":50,"Heavy Modular Frame":50,"Rubber":300,}, depends_on=("AI Limiter", "High-Speed Connector")), #(Research_Caterium_7_2_C) # 1.0
             MamNode("Priority Power Switch", {"High-Speed Connector":25,"Circuit Board":50,}, depends_on=("High-Speed Connector", )), #(Research_Caterium_5_1_C)
             MamNode("Stun Rebar", {"Quickwire":50,"Iron Rebar":10,}, depends_on=("Quickwire", )), #(Research_Caterium_3_2_C)
-            MamNode("Power Poles Mk.3", {"High-Speed Connector":50,"Steel Pipe":200,}, depends_on=("Power Poles Mk.2", )), #(Research_Caterium_6_2_C)
+            MamNode("Power Poles Mk.3", {"High-Speed Connector":50,"Steel Pipe":200,}, depends_on=("Power Poles Mk.2", )), #(Research_Caterium_6_2_C) # 1.0
         )),
         "Mycelia": MamTree(("Mycelia", ), ( # Mycelia (BPD_ResearchTree_Mycelia_C)
             MamNode("Therapeutic Inhaler", {"Mycelia":15,"Bacon Agaric":1,"Alien Protein":1,}, depends_on=("Medical Properties", )), #(Research_Mycelia_6_C)
@@ -782,6 +811,7 @@ class GameLogic:
             MamNode("Vitamin Inhaler", {"Mycelia":10,"Paleberry":5,}, depends_on=("Medical Properties", )), #(Research_Mycelia_5_C)
             MamNode("Parachute", {"Fabric":10,"Cable":50,}, depends_on=("Fabric", )), #(Research_Mycelia_3_C)
             MamNode("Synthethic Polyester Fabric", {"Fabric":25,"Polymer Resin":100,}, depends_on=("Fabric", )), #(Research_Mycelia_2_1_C)
+            MamNode("Gas Mask", {"Coal":10,"Fabric":50,"Steel Pipe":50}, depends_on=("Fabric", )), # 1.0
         )),
         "Nutrients": MamTree(("Paleberry", "Beryl Nut", "Bacon Agaric"), ( # Nutrients (BPD_ResearchTree_Nutrients_C)
             MamNode("Bacon Agaric", {"Bacon Agaric":1,}, depends_on=()), #(Research_Nutrients_2_C)
@@ -796,6 +826,7 @@ class GameLogic:
             MamNode("Yellow Power Shards", {"Yellow Power Slug":1,"Rotor":25,"Cable":100,}, depends_on=("Blue Power Slugs", )), #(Research_PowerSlugs_4_C)
             MamNode("Purple Power Shards", {"Purple Power Slug":1,"Modular Frame":25,"Copper Sheet":100,}, depends_on=("Yellow Power Shards", )), #(Research_PowerSlugs_5_C)
             MamNode("Overclock Production", {"Power Shard":1,"Iron Plate":50,"Wire":50,}, depends_on=("Blue Power Slugs", )), #(Research_PowerSlugs_2_C)
+            MamNode("Synthetic Power Shards", {"Power Shard":10,"Time Crystal":100,"Quartz Crystal":200,}, depends_on=("Purple Power Shards", )), # 1.0
         )),
         "Quartz": MamTree(("Raw Quartz", ), ( # Quartz (BPD_ResearchTree_Quartz_C)
             MamNode("Crystal Oscillator", {"Quartz Crystal":100,"Reinforced Iron Plate":50,}, depends_on=("Quartz Crystals", )), #(Research_Quartz_2_C)
@@ -808,23 +839,25 @@ class GameLogic:
             MamNode("The Explorer", {"Crystal Oscillator":10,"Modular Frame":100,}, depends_on=("Crystal Oscillator", )), #(Research_Quartz_3_1_C)
             MamNode("Radio Signal Scanning", {"Crystal Oscillator":100,"Motor":100,"Object Scanner":1,}, depends_on=("Crystal Oscillator", )), #(Research_Quartz_4_1_C)
             MamNode("Inflated Pocket Dimension", {"Silica":200,}, depends_on=("Silica", )), #(Research_Caterium_3_1_C)
-            MamNode("Radar Technology", {"Crystal Oscillator":50,"Heavy Modular Frame":50,"Circuit Board":100,}, depends_on=("Crystal Oscillator", )), #(Research_Quartz_4_C)
+            MamNode("Radar Technology", {"Crystal Oscillator":50,"Heavy Modular Frame":50,"Computer":50,}, depends_on=("Crystal Oscillator", )), #(Research_Quartz_4_C) # 1.0
         )),
         "Sulfur": MamTree(("Sulfur", ), ( # Sulfur (BPD_ResearchTree_Sulfur_C)
             MamNode("The Nobelisk Detonator", {"Black Powder":50,"Steel Pipe":100,"Cable":200,}, depends_on=("Black Powder", )), #(Research_Sulfur_3_1_C)
             MamNode("Smokeless Powder", {"Black Powder":100,"Plastic":50,}, depends_on=("Black Powder", )), #(Research_Sulfur_3_C)
             MamNode("Sulfur", {"Sulfur":10,}, depends_on=()), #(Research_Sulfur_0_C)
-            MamNode("Inflated Pocket Dimension", {"Smokeless Powder":50,"Circuit Board":50,}, depends_on=("Nuclear Deterrent Development", "Turbo Rifle Ammo", "Cluster Nobelisk", "The Rifle")), #(Research_Sulfur_6_C)
+            MamNode("Inflated Pocket Dimension", {"Smokeless Powder":50,"Computer":50,}, depends_on=("Nuclear Deterrent Development", "Turbo Rifle Ammo", "Cluster Nobelisk", "The Rifle")), #(Research_Sulfur_6_C)
             MamNode("The Rifle", {"Smokeless Powder":50,"Motor":100,"Rubber":200,}, depends_on=("Smokeless Powder", )), #(Research_Sulfur_4_1_C)
             MamNode("Compacted Coal", {"Hard Drive":1,"Sulfur":25,"Coal":25,}, depends_on=("Experimental Power Generation", )), #(Research_Sulfur_CompactedCoal_C)
             MamNode("Black Powder", {"Sulfur":50,"Coal":25,}, depends_on=("Sulfur", )), #(Research_Sulfur_1_C)
             MamNode("Explosive Rebar", {"Smokeless Powder":200,"Iron Rebar":200,"Steel Beam":200,}, depends_on=("Smokeless Powder", )), #(Research_Sulfur_4_2_C)
             MamNode("Cluster Nobelisk", {"Smokeless Powder":100,"Nobelisk":200,}, depends_on=("Smokeless Powder", )), #(Research_Sulfur_4_C)
             MamNode("Experimental Power Generation", {"Sulfur":25,"Modular Frame":50,"Rotor":100,}, depends_on=("Sulfur", )), #(Research_Sulfur_ExperimentalPower_C)
-            MamNode("Turbo Rifle Ammo", {"Rifle Ammo":1000,"Packaged Turbofuel":50,"Aluminum Casing":100,}, depends_on=("Smokeless Powder", )), #(Research_Sulfur_5_2_C)
+            MamNode("Turbo Rifle Ammo", {"Rifle Ammo":1000,"Packaged Turbofuel":50,"Aluminum Casing":100,}, depends_on=("The Rifle", )), #(Research_Sulfur_5_2_C) # 1.0
             MamNode("Turbo Fuel", {"Hard Drive":1,"Compacted Coal":15,"Packaged Fuel":50,}, depends_on=("Experimental Power Generation", )), #(Research_Sulfur_TurboFuel_C)
             MamNode("Expanded Toolbelt", {"Black Powder":100,"Encased Industrial Beam":50,}, depends_on=("Black Powder", )), #(Research_Sulfur_5_C)
-            MamNode("Nuclear Deterrent Development", {"Nobelisk":500,"Encased Uranium Cell":10,"AI Limiter":100,}, depends_on=("Smokeless Powder", )), #(Research_Sulfur_5_1_C)
+            MamNode("Nuclear Deterrent Development", {"Nobelisk":500,"Encased Uranium Cell":10,"AI Limiter":100,}, depends_on=("Cluster Nobelisk", )), #(Research_Sulfur_5_1_C) # 1.0
+            MamNode("Rocket Fuel", {"Hard Drive":1,"Empty Fluid Tank":10,"Packaged Turbofuel":100,}, depends_on=("Turbo Fuel", )), # 1.0
+            MamNode("Ionized Fuel", {"Hard Drive":1,"Power Shard":100,"Packaged Rocket Fuel":200,}, depends_on=("Turbo Fuel", )), # 1.0
         ))
     }
 

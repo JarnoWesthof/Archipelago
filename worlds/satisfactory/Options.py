@@ -287,7 +287,7 @@ class GoalSelection(OptionSet):
 class ExperimentalGeneration(Toggle):
     """Attempts to only mark recipes as progression if they are on your path to victory
     WARNING: has a very high change of generation failure and should therefor only be used in single player games"""
-    display_name = "ExperimentalGeneration"
+    display_name = "Experimental Generation"
     visibility = Visibility.none
 
 @dataclass

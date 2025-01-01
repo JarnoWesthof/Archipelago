@@ -1,5 +1,5 @@
-from typing import Dict, List, Set, TextIO, ClassVar, Tuple
-from BaseClasses import Item, MultiWorld, ItemClassification
+from typing import Dict, List, Set, TextIO, ClassVar, Tuple, Counter
+from BaseClasses import Item, MultiWorld, ItemClassification, CollectionState
 from .GameLogic import GameLogic
 from .Items import Items
 from .Locations import Locations, LocationData
@@ -101,6 +101,20 @@ class SatisfactoryWorld(World):
 
         self.multiworld.completion_condition[self.player] = \
             lambda state: self.state_logic.can_produce_all(state, required_parts_tuple)
+
+
+    def collect(self, state: CollectionState, item: Item) -> bool:
+        change = super().collect(state, item)
+        if change and item.name == "Recipe: Quartz Purification":
+            state.prog_items[self.player]["Recipe: Distilled Silica"] = 1
+        return change
+
+
+    def remove(self, state: CollectionState, item: Item) -> bool:
+        change = super().remove(state, item)
+        if change and item.name == "Recipe: Quartz Purification":
+            del state.prog_items[self.player]["Recipe: Distilled Silica"]
+        return change
 
 
     def fill_slot_data(self) -> Dict[str, object]:
