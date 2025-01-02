@@ -274,6 +274,8 @@ class GameLogic:
             Recipe("Alumina Solution", "Refinery", ("Bauxite", "Water"), additional_outputs=("Alumina Solution", ), minimal_belt_speed=2),
             Recipe("Cheap Silica", "Assembler", ("Raw Quartz", "Limestone")),
             Recipe("Distilled Silica", "Blender", ("Dissolved Silica", "Limestone", "Water"), additional_outputs=("Water", ))),
+        "Dissolved Silica": (
+            Recipe("Quartz Purification", "Refinery", ("Raw Quartz", "Nitric Acid"), additional_outputs=("Quartz Crystal", ), minimal_belt_speed=2), ),
         "Quartz Crystal": (
             Recipe("Quartz Crystal", "Constructor", ("Raw Quartz", ), handcraftable=True),
             Recipe("Pure Quartz Crystal", "Refinery", ("Raw Quartz", "Water"), minimal_belt_speed=2),
@@ -307,7 +309,7 @@ class GameLogic:
             Recipe("Compacted Coal", "Assembler", ("Coal", "Sulfur")), ),
         "Motor": (
             Recipe("Motor", "Assembler", ("Rotor", "Stator"), handcraftable=True),
-            Recipe("Rigour Motor", "Manufacturer", ("Rotor", "Stator", "Crystal Oscillator")),
+            Recipe("Rigor Motor", "Manufacturer", ("Rotor", "Stator", "Crystal Oscillator")),
             Recipe("Electric Motor", "Assembler", ("Electromagnetic Control Rod", "Rotor"))),
         "Modular Frame": (
             Recipe("Modular Frame", "Assembler", ("Reinforced Iron Plate", "Iron Rod"), handcraftable=True),
@@ -706,7 +708,7 @@ class GameLogic:
         ),
         ( # Tier 6
             {"Motor":200, "Modular Frame":200, "Plastic":400, "Cable":1000, }, # Schematic: Industrial Manufacturing (Schematic_5-2_C)
-            {"Motor":250, "Encased Industrial Beam":500, "Steel Pipe":1000, "Steel Beam":1000, } # Schematic: Monorail Train Technology (Schematic_6-3_C)
+            {"Motor":250, "Encased Industrial Beam":500, "Steel Pipe":1000, "Steel Beam":1000, }, # Schematic: Monorail Train Technology (Schematic_6-3_C)
             {"Computer":50, "Steel Pipe":4000, "Copper Sheet":1000, }, 
             {"Heavy Modular Frame":50, "Plastic":1000, "Rubber":1000, }, # Schematic: Pipeline Engineering Mk.2 (Schematic_6-5_C)
             {"Heavy Modular Frame":50, "Computer":100, "Rubber":400, "Concrete": 1000, }, 
@@ -762,24 +764,24 @@ class GameLogic:
         # 1.0
         "Alien Technology": MamTree(("SAM", "Mercer Sphere", "Somersloop"), (
             MamNode("SAM Analysis", {"SAM":10,}, depends_on=()),
-            MamNode("SAM Reanimation", {"SAM":20,}, depends_on=("SAM Analysis")),
-            MamNode("SAM Fluctuator", {"Reanimated SAM":10,"Steel Pipe":100,"Wire":200,}, depends_on=("SAM Reanimation")),
+            MamNode("SAM Reanimation", {"SAM":20,}, depends_on=("SAM Analysis",)),
+            MamNode("SAM Fluctuator", {"Reanimated SAM":10,"Steel Pipe":100,"Wire":200,}, depends_on=("SAM Reanimation",)),
             MamNode("Mercer Sphere Analysis", {"Mercer Sphere":1,}, depends_on=()),
             MamNode("Dimensional Depot", {"Mercer Sphere":1,"SAM Fluctuator":11,}, depends_on=("Mercer Sphere Analysis", "SAM Fluctuator")),
-            MamNode("Manual Depot Uploader", {"Mercer Sphere":3,"Computer":17,"SAM Fluctuator":19,}, depends_on=("Dimensional Depot")),
-            MamNode("Depot Expansion (200%)", {"Mercer Sphere":3,"SAM Fluctuator":47,}, depends_on=("Dimensional Depot")),
-            MamNode("Depot Expansion (300%)", {"Mercer Sphere":7,"SAM Fluctuator":103,}, depends_on=("Depot Expansion (200%)")),
-            MamNode("Depot Expansion (400%)", {"Mercer Sphere":13,"SAM Fluctuator":151,}, depends_on=("Depot Expansion (300%)")),
-            MamNode("Depot Expansion (500%)", {"Mercer Sphere":23,"SAM Fluctuator":199,}, depends_on=("Depot Expansion (400%)")),
-            MamNode("Upload Upgrade: 30/min", {"Mercer Sphere":3,"SAM Fluctuator":47,}, depends_on=("Dimensional Depot")),
-            MamNode("Upload Upgrade: 60/min", {"Mercer Sphere":7,"SAM Fluctuator":103,}, depends_on=("Upload Upgrade: 30/min")),
-            MamNode("Upload Upgrade: 120/min", {"Mercer Sphere":13,"SAM Fluctuator":151,}, depends_on=("Upload Upgrade: 60/min")),
-            MamNode("Upload Upgrade: 240/min", {"Mercer Sphere":23,"SAM Fluctuator":199,}, depends_on=("Upload Upgrade: 120/min")),
+            MamNode("Manual Depot Uploader", {"Mercer Sphere":3,"Computer":17,"SAM Fluctuator":19,}, depends_on=("Dimensional Depot",)),
+            MamNode("Depot Expansion (200%)", {"Mercer Sphere":3,"SAM Fluctuator":47,}, depends_on=("Dimensional Depot",)),
+            MamNode("Depot Expansion (300%)", {"Mercer Sphere":7,"SAM Fluctuator":103,}, depends_on=("Depot Expansion (200%)",)),
+            MamNode("Depot Expansion (400%)", {"Mercer Sphere":13,"SAM Fluctuator":151,}, depends_on=("Depot Expansion (300%)",)),
+            MamNode("Depot Expansion (500%)", {"Mercer Sphere":23,"SAM Fluctuator":199,}, depends_on=("Depot Expansion (400%)",)),
+            MamNode("Upload Upgrade: 30/min", {"Mercer Sphere":3,"SAM Fluctuator":47,}, depends_on=("Dimensional Depot",)),
+            MamNode("Upload Upgrade: 60/min", {"Mercer Sphere":7,"SAM Fluctuator":103,}, depends_on=("Upload Upgrade: 30/min",)),
+            MamNode("Upload Upgrade: 120/min", {"Mercer Sphere":13,"SAM Fluctuator":151,}, depends_on=("Upload Upgrade: 60/min",)),
+            MamNode("Upload Upgrade: 240/min", {"Mercer Sphere":23,"SAM Fluctuator":199,}, depends_on=("Upload Upgrade: 120/min",)),
             MamNode("Somersloop Analysis", {"Somersloop":1,}, depends_on=()),
             MamNode("Alien Energy Harvesting", {"SAM Fluctuator":10,}, depends_on=("Somersloop Analysis", "SAM Fluctuator")),
-            MamNode("Production Amplifier", {"Somersloop":1,"SAM Fluctuator":100,"Circuit Board":50,}, depends_on=("Alien Energy Harvesting")),
-            MamNode("Power Augmenter", {"Somersloop":1,"SAM Fluctuator":100,"Computer":50,}, depends_on=("Alien Energy Harvesting")),
-            MamNode("Alien Power Matrix", {"Singularity Cell":50,"Power Shard":100,"SAM Fluctuator":500}, depends_on=("Power Augmenter")),
+            MamNode("Production Amplifier", {"Somersloop":1,"SAM Fluctuator":100,"Circuit Board":50,}, depends_on=("Alien Energy Harvesting",)),
+            MamNode("Power Augmenter", {"Somersloop":1,"SAM Fluctuator":100,"Computer":50,}, depends_on=("Alien Energy Harvesting",)),
+            MamNode("Alien Power Matrix", {"Singularity Cell":50,"Power Shard":100,"SAM Fluctuator":500}, depends_on=("Power Augmenter",)),
         )),
         # 1.0
         "Caterium": MamTree(("Caterium Ore", ), ( # Caterium (BPD_ResearchTree_Caterium_C)
@@ -797,7 +799,6 @@ class GameLogic:
             MamNode("Programmable Splitter", {"AI Limiter":100, "Computer":50,"Heavy Modular Frame":50,}, depends_on=("AI Limiter", "High-Speed Connector")), #(Research_Caterium_7_1_C) # 1.0
             MamNode("Zipline", {"Quickwire":100,"Cable":50,}, depends_on=("Quickwire", )), #(Research_Caterium_2_1_C)
             MamNode("Geothermal Generator", {"Supercomputer":50,"Heavy Modular Frame":50,"Rubber":300,}, depends_on=("AI Limiter", "High-Speed Connector")), #(Research_Caterium_7_2_C) # 1.0
-            MamNode("Priority Power Switch", {"High-Speed Connector":25,"Circuit Board":50,}, depends_on=("High-Speed Connector", )), #(Research_Caterium_5_1_C)
             MamNode("Stun Rebar", {"Quickwire":50,"Iron Rebar":10,}, depends_on=("Quickwire", )), #(Research_Caterium_3_2_C)
             MamNode("Power Poles Mk.3", {"High-Speed Connector":50,"Steel Pipe":200,}, depends_on=("Power Poles Mk.2", )), #(Research_Caterium_6_2_C) # 1.0
         )),

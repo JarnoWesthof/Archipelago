@@ -43,9 +43,9 @@ class SatisfactoryWorld(World):
         if not self.options.goal_selection.value:
             raise Exception("""Satisfactory: player {} needs to choose a goal, the option goal_selection is empty"""
                 .format(self.multiworld.player_name[self.player]))
-        if "Space elevator tier" in self.options.goal_selection and self.options.final_elevator_tier.value <= 0:
+        if "Space elevator tier" in self.options.goal_selection and self.options.final_elevator_package.value <= 0:
                 raise Exception("""Satisfactory: player {} selected "Space elevator tier" as their goal
-                    but the option final_elevator_tier is not properly set"""
+                    but the option final_elevator_package is not properly set"""
                     .format(self.multiworld.player_name[self.player]))
         if "Resource sink points" in self.options.goal_selection and self.options.final_resource_sink_points.value <= 0:
                 raise Exception("""Satisfactory: player {} selected "Space elevator tier" as their goal
@@ -90,7 +90,8 @@ class SatisfactoryWorld(World):
         resource_sink_goal: bool = "Resource sink points" in self.options.goal_selection
 
         last_elevator_tier: int = \
-            len(self.game_logic.space_elevator_tiers) if resource_sink_goal else self.options.final_elevator_tier.value
+            len(self.game_logic.space_elevator_tiers) if resource_sink_goal \
+                else self.options.final_elevator_package.value
         
         required_parts: Set[str] = set(self.game_logic.space_elevator_tiers[last_elevator_tier - 1].keys())
 
@@ -135,7 +136,7 @@ class SatisfactoryWorld(World):
                 "SlotsPerMilestone": self.game_logic.slots_per_milestone,
                 "Options": {
                     "GoalSelection": self.options.goal_selection.value,
-                    "FinalElevatorTier": self.options.final_elevator_tier.value,
+                    "FinalElevatorTier": self.options.final_elevator_package.value,
                     "FinalResourceSinkPoints": self.options.final_resource_sink_points.value,
                     "EnableHardDriveGacha": True if self.options.hard_drive_progression_limit else False,
                     "FreeSampleEquipment": self.options.free_sample_equipment.value,

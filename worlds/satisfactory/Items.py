@@ -444,10 +444,10 @@ class Items:
         "Recipe: Time Crystal": ItemData(frozenset({G.Recipe}), 1338442, C.progression),
         "Recipe: Superposition Oscillator": ItemData(frozenset({G.Recipe}), 1338443, C.progression),
         #"Recipe: Excited Photonic Matter": ItemData(frozenset({G.Recipe}), 1338444, C.progression), should probably be unlocked with converter
-        "Recipe: Rocket Fuel": ItemData(frozenset({G.Recipe}), 1338445, C.useful),
-        "Recipe: Nitro Rocket Fuel": ItemData(frozenset({G.Recipe}), 1338446, C.useful),
+        "Recipe: Rocket Fuel": ItemData(frozenset({G.Recipe}), 1338445, C.progression),
+        "Recipe: Nitro Rocket Fuel": ItemData(frozenset({G.Recipe}), 1338446, C.progression),
         "Recipe: Ionized Fuel": ItemData(frozenset({G.Recipe}), 1338447, C.useful),
-        "Recipe: Packaged Rocket Fuel": ItemData(frozenset({G.Recipe}), 1338448, C.useful),
+        "Recipe: Packaged Rocket Fuel": ItemData(frozenset({G.Recipe}), 1338448, C.progression),
         "Recipe: Packaged Ionized Fuel": ItemData(frozenset({G.Recipe}), 1338449, C.useful),
         "Recipe: Dark-Ion Fuel": ItemData(frozenset({G.Recipe}), 1338450, C.useful),
         "Recipe: Quartz Purification": ItemData(frozenset({G.Recipe}), 1338451, C.progression),
