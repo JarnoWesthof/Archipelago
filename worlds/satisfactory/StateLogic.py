@@ -38,6 +38,9 @@ class StateLogic:
         return power_level is None or state.has(building_event_prefix + power_level.to_name(), self.player)
 
     def can_produce_all(self, state: CollectionState, parts: Optional[Iterable[str]]) -> bool:
+        if parts and "SAM" in parts:
+            debug = "Now"
+
         return parts is None or \
             state.has_all(map(self.to_part_event, parts), self.player)
 

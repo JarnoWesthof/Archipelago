@@ -161,6 +161,10 @@ class GameLogic:
             Recipe("Purple Power Slug", handcraftable=True, implicitly_unlocked=True), ),
         "Hard Drive": (
             Recipe("Hard Drive", handcraftable=True, implicitly_unlocked=True), ),
+        "Mercer Sphere": (
+            Recipe("Mercer Sphere", handcraftable=True, implicitly_unlocked=True), ),
+        "Somersloop": (
+            Recipe("Somersloop", handcraftable=True, implicitly_unlocked=True), ),
 
         # Raw Resources
         "Water": (

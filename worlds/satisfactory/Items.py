@@ -144,8 +144,8 @@ class Items:
         "Bundle: Ballistic Warp Drive": ItemData(frozenset({G.Parts}), 1338128),
         "Bundle: Ficsonium": ItemData(frozenset({G.Trap}), 1338129, C.trap),
         "Bundle: Ficsonium Fuel Rod": ItemData(frozenset({G.Trap}), 1338130, C.trap),
-        "Bundle: Packaged Rocket Fuel": ItemData(frozenset({G.Parts}), 1338031),
-        "Bundle: Packaged Ionized Fuel": ItemData(frozenset({G.Parts}), 1338032),
+        "Bundle: Packaged Rocket Fuel": ItemData(frozenset({G.Parts}), 13381031),
+        "Bundle: Packaged Ionized Fuel": ItemData(frozenset({G.Parts}), 1338132),
 # 1.0
 
         #1338131 - 1338149 Reserved for future parts
@@ -459,7 +459,7 @@ class Items:
         "Recipe: Molded Steel Pipe": ItemData(frozenset({G.Recipe}), 1338457, C.progression),
         "Recipe: Plastic AI Limiter": ItemData(frozenset({G.Recipe}), 1338458, C.progression),
         "Recipe: Tempered Caterium Ingot": ItemData(frozenset({G.Recipe}), 1338459, C.progression),
-        "Recipe: Tempered Copper Ingot": ItemData(frozenset({G.Recipe}), 1338459, C.progression),
+        "Recipe: Tempered Copper Ingot": ItemData(frozenset({G.Recipe}), 1338460, C.progression),
 # 1.0
 
         #1338434 - 1338599 Reserved for future recipes

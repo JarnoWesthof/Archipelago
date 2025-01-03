@@ -122,7 +122,7 @@ def create_regions_and_return_locations(world: MultiWorld, options: Satisfactory
                 lambda state, building_name=building_name: state_logic.can_build(state, building_name))
         
     for tree_name, tree in game_logic.man_trees.items():
-        connect(regions, "Mam", tree_name, can_produce_all_allowing_handcrafting(tree.access_items))
+        connect(regions, "Mam", tree_name)
 
         for node in tree.nodes:
             if not node.depends_on:
