@@ -144,7 +144,7 @@ class Items:
         "Bundle: Ballistic Warp Drive": ItemData(frozenset({G.Parts}), 1338128),
         "Bundle: Ficsonium": ItemData(frozenset({G.Trap}), 1338129, C.trap),
         "Bundle: Ficsonium Fuel Rod": ItemData(frozenset({G.Trap}), 1338130, C.trap),
-        "Bundle: Packaged Rocket Fuel": ItemData(frozenset({G.Parts}), 13381031),
+        "Bundle: Packaged Rocket Fuel": ItemData(frozenset({G.Parts}), 1338131),
         "Bundle: Packaged Ionized Fuel": ItemData(frozenset({G.Parts}), 1338132),
 # 1.0
 
