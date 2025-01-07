@@ -131,12 +131,13 @@ You may wish to launch the Archipelago Text Client and use it to run commands in
 ## Multiplayer and Dedicated Servers
 
 It is possible to host a Satisfactory Archipelago Slot using the game's built in host-and-play multiplayer, allowing other Satisfactory players to join in constructing your factory.
-This experience is **not fully functional yet** - note that client players can't see any Archipelago progression information in the HUB, MAM, or AWESOME Shop.
+This experience is wonderfull - but there are few things not yet properly working for multiplayer
+* Death-links do not kill clients
+* Starting inventory for clients is missing
 Remember that client players must have the same mods installed as the host player to join,
 however, they do not need to configure Archipelago connection settings.
 
-Dedicated server support is not working at the moment.
-The team hopes to add this feature in the future.
+Dedicated server support is only working for windows at the moment.
 
 ## Additional Mods
 

@@ -866,115 +866,115 @@ class GameLogic:
         ))
     }
 
-    # drop_pods: List[DropPodData] = [
-    #     # Regenerate via /Script/Engine.Blueprint'/Archipelago/Debug/CC_BuildDropPodLocations.CC_BuildDropPodLocations' 
-    #     DropPodData(-29068, -22640, 17384,  "Encased Industrial Beam", 0), # Unlocks with: 4 x Desc_SteelPlateReinforced_C
-    #     DropPodData(-33340, 5176,   23519,  "Crystal Oscillator", 0), # Unlocks with: 5 x Desc_CrystalOscillator_C
-    #     DropPodData(8680,   -41777, 13053,  "Steel Pipe", 0), # Unlocks with: 7 x Desc_SteelPipe_C
-    #     DropPodData(35082,  16211,  22759,  "Supercomputer", 0), # Unlocks with: 7 x Desc_ComputerSuper_C
-    #     DropPodData(-3511, 62314,  22109,  "Quantum Computer", self.state_logic, , 0), # Unlocks with: 1 x Desc_ComputerQuantum_C
-    #     DropPodData(66652,  -13642, 13420,  "Encased Industrial Beam", 50), # Unlocks with: 3 x Desc_SteelPlateReinforced_C
-    #     DropPodData(55247,  -51316, 14363,  None, 25), # Unlocks with: (No Item)
-    #     DropPodData(-4706,  -76301, 13618,  "Black Powder", 0), # Unlocks with: 10 x Desc_Gunpowder_C
-    #     DropPodData(-40194,62956,  26261,  "Superposition Oscillator", self.state_logic, , 138), # Unlocks with: 2 x Desc_QuantumOscillator_C
-    #     DropPodData(80980,  -44100, 8303,   "Rotor", 0), # Unlocks with: 3 x Desc_Rotor_C
-    #     DropPodData(-56144, -72864, 27668,  "Quartz Crystal", 0), # Unlocks with: 2 x Desc_QuartzCrystal_C
-    #     DropPodData(-95228, 6970,   25142,  "High-Speed Connector", 112), # Unlocks with: 11 x Desc_HighSpeedConnector_C
-    #     DropPodData(-89284, -50630, 16019,  None, 50), # Unlocks with: (No Item)
-    #     DropPodData(-94708, 40337,  19832,  "Heat Sink", 138), # Unlocks with: 2 x Desc_AluminumPlateReinforced_C
-    #     DropPodData(94267,  47237,  9435,   "Motor", 0), # Unlocks with: 1 x Desc_Motor_C
-    #     DropPodData(87739,  -62975, 13444,  None, 30), # Unlocks with: (No Item)
-    #     DropPodData(12249,  114177, 26721,  "AI Limiter", 267), # Unlocks with: 9 x Desc_CircuitBoardHighSpeed_C
-    #     DropPodData(115978, 21424,  15519,  None, 0), # Unlocks with: (No Item)
-    #     DropPodData(-78236, 90857,  20305,  "Radio Control Unit", 0), # Unlocks with: 6 x Desc_ModularFrameLightweight_C
-    #     DropPodData(-35359, 116594, 21827,  "Turbo Motor", 0), # Unlocks with: 6 x Desc_MotorLightweight_C
-    #     DropPodData(111479, -54515, 17081,  "Stator", 20), # Unlocks with: 1 x Desc_Stator_C
-    #     DropPodData(121061, 45324,  17373,  None, 0), # Unlocks with: (No Item)
-    #     DropPodData(125497, -34949, 8220,   None, 50), # Unlocks with: (No Item)
-    #     DropPodData(-26327, -129047,7780,   "Modular Frame", 0), # Unlocks with: 1 x Desc_ModularFrame_C
-    #     DropPodData(21373,  132336, 2510,   "Motor", 20), # Unlocks with: 2 x Desc_Motor_C
-    #     DropPodData(17807,  -136922,13621,  "Rotor", 0), # Unlocks with: 1 x Desc_Rotor_C
-    #     DropPodData(-118480,74929,  16995,  None, 420), # Unlocks with: (No Item)
-    #     DropPodData(94940,  105482, 9860,   "Heavy Modular Frame", 0), # Unlocks with: 1 x Desc_ModularFrameHeavy_C
-    #     DropPodData(-129115,60165,  4800,   None, 53), # Unlocks with: (No Item)
-    #     DropPodData(-142000,23970,  32660,  None, 0), # Unlocks with: (No Item)
-    #     DropPodData(46048,  141933, 13064,  None, 40), # Unlocks with: (No Item)
-    #     DropPodData(144456, 36294,  17301,  "Circuit Board", 48), # Unlocks with: 20 x Desc_CircuitBoard_C
-    #     DropPodData(-43144, 145820, 7472,   "Modular Frame", 0), # Unlocks with: 5 x Desc_ModularFrame_C
-    #     DropPodData(-108774,107811, 10154,  "Crystal Oscillator", 0), # Unlocks with: 1 x Desc_CrystalOscillator_C
-    #     DropPodData(-56987, -144603,2072,   "Rotor", 10), # Unlocks with: 1 x Desc_Rotor_C
-    #     DropPodData(-152676,33864,  19283,  None, 256), # Unlocks with: (No Item)
-    #     DropPodData(90313,  129583, 9112,   "Crystal Oscillator", 20), # Unlocks with: 2 x Desc_CrystalOscillator_C
-    #     DropPodData(111212, -113040,12036,  "Screw", 10), # Unlocks with: 15 x Desc_IronScrew_C
-    #     DropPodData(-157077,-6312,  25128,  "Turbo Motor", 0), # Unlocks with: 8 x Desc_MotorLightweight_C
-    #     DropPodData(157249, -40206, 13694,  "High-Speed Connector", 0), # Unlocks with: 2 x Desc_HighSpeedConnector_C
-    #     DropPodData(-151842,72468,  9945,   "Encased Industrial Beam", 0), # Unlocks with: 3 x Desc_SteelPlateReinforced_C
-    #     DropPodData(64696,  156038, 14067,  "Modular Frame", 0), # Unlocks with: 6 x Desc_ModularFrame_C
-    #     DropPodData(-157080,-67028, 11766,  "Rotor", 0), # Unlocks with: 4 x Desc_Rotor_C
-    #     DropPodData(170057, -10579, 18823,  None, 50), # Unlocks with: (No Item)
-    #     DropPodData(143671, 92573,  24990,  "Crystal Oscillator", 20), # Unlocks with: 2 x Desc_CrystalOscillator_C
-    #     DropPodData(127215, -116866,-1397,  "Rubber", 0), # Unlocks with: 10 x Desc_Rubber_C
-    #     DropPodData(163999, 61333,  21481,  "AI Limiter", 0), # Unlocks with: 3 x Desc_CircuitBoardHighSpeed_C
-    #     DropPodData(98306,  -149781,2552,   None, 40), # Unlocks with: (No Item)
-    #     DropPodData(5302,   -187090,-1608,  None, 0), # Unlocks with: (No Item)
-    #     DropPodData(188304, 17059,  12949,  None, 0), # Unlocks with: (No Item)
-    #     DropPodData(84256,  -171122,-290,   None, 0), # Unlocks with: (No Item)
-    #     DropPodData(191366, 37694,  5676,   "Computer", 0), # Unlocks with: 4 x Desc_Computer_C
-    #     DropPodData(28695,  193441, 17459,  "Quickwire", 0), # Unlocks with: 9 x Desc_HighSpeedWire_C
-    #     DropPodData(-146044,-137047,2357,   "Modular Frame", 0), # Unlocks with: 9 x Desc_ModularFrame_C
-    #     DropPodData(-200203,-17766, 12193,  "Solid Biofuel", 0), # Unlocks with: 10 x Desc_Biofuel_C
-    #     DropPodData(47834,  195703, 2943,   "Black Powder", 0), # Unlocks with: 4 x Desc_Gunpowder_C
-    #     DropPodData(198418, -41186, 13786,  None, 0), # Unlocks with: (No Item)
-    #     DropPodData(-195756,-59210, -84,    None, 30), # Unlocks with: (No Item)
-    #     DropPodData(-121994,166916, -49,    "Steel Beam", 20), # Unlocks with: 4 x Desc_SteelPlate_C
-    #     DropPodData(88323,  188913, 1420,   None, 30), # Unlocks with: (No Item)
-    #     DropPodData(-123677,-167107,29710,  "Motor", 0), # Unlocks with: 4 x Desc_Motor_C
-    #     DropPodData(150633, 146698, 7727,   "Crystal Oscillator", 20), # Unlocks with: 2 x Desc_CrystalOscillator_C
-    #     DropPodData(-55111, -204857,7844,   "Motor", 0), # Unlocks with: 30 x Desc_Motor_C
-    #     DropPodData(216096, -268,   -1592,  "Heat Sink", 0), # Unlocks with: 7 x Desc_AluminumPlateReinforced_C
-    #     DropPodData(159088, -145116,23164,  "Motor", 0), # Unlocks with: 30 x Desc_Motor_C
-    #     DropPodData(207683, -68352, 3927,   "Encased Industrial Beam", 20), # Unlocks with: 27 x Desc_SteelPlateReinforced_C
-    #     DropPodData(-189258,116331, -1764,  None, 0), # Unlocks with: (No Item)
-    #     DropPodData(46951,  221859, 5917,   None, 20), # Unlocks with: (No Item)
-    #     DropPodData(-9988,  227625, -1017,  None, 40), # Unlocks with: (No Item)
-    #     DropPodData(232515, -20519, 8979,   "Crystal Oscillator", 15), # Unlocks with: 2 x Desc_CrystalOscillator_C
-    #     DropPodData(232138,27191,  -1629,  "Supercomputer", 0), # Unlocks with: 5 x Desc_ComputerSuper_C
-    #     DropPodData(-135,   -237257,-1760,  None, 0), # Unlocks with: (No Item)
-    #     DropPodData(-232498,-51432, -386,   "Rotor", 0), # Unlocks with: 21 x Desc_Rotor_C
-    #     DropPodData(-238333,17321,  19741,  "Heat Sink", 0), # Unlocks with: 3 x Desc_AluminumPlateReinforced_C
-    #     DropPodData(200510, 131912, 6341,   "Motor", 0), # Unlocks with: 30 x Desc_Motor_C
-    #     DropPodData(-108812,214051, 3200,   "Quickwire", 0), # Unlocks with: 1 x Desc_HighSpeedWire_C
-    #     DropPodData(232255, 79925,  -1275,  "Turbo Motor", 67), # Unlocks with: 2 x Desc_MotorLightweight_C
-    #     DropPodData(226418, 98109,  7339,   None, 200), # Unlocks with: (No Item)
-    #     DropPodData(156569, 191767, -9312,  "Rubber", 0), # Unlocks with: 4 x Desc_Rubber_C
-    #     DropPodData(44579,  -244343,-874,   None, 0), # Unlocks with: (No Item)
-    #     DropPodData(118349, 221905, -7063,  "Encased Industrial Beam", 0), # Unlocks with: 6 x Desc_SteelPlateReinforced_C
-    #     DropPodData(249919,59534,  2430,   "Quantum Computer", self.state_logic, , 0), # Unlocks with: 1 x Desc_ComputerQuantum_C
-    #     DropPodData(188233, 177201, 9608,   "Quickwire", 0), # Unlocks with: 12 x Desc_HighSpeedWire_C
-    #     DropPodData(-174494,-197134,-1538,  None, 30), # Unlocks with: (No Item)
-    #     DropPodData(-50655, -259272,-1667,  None, 0), # Unlocks with: (No Item)
-    #     DropPodData(30383,  266975, -987,   "Screw", 0), # Unlocks with: 12 x Desc_IronScrew_C
-    #     DropPodData(272715, 28087,  -1586,  "Supercomputer", 0), # Unlocks with: 2 x Desc_ComputerSuper_C
-    #     DropPodData(-152279,229520,1052,   "Modular Frame", 0), # Unlocks with: 5 x Desc_ModularFrame_C
-    #     DropPodData(241532, 131343, 17157,  None, 0), # Unlocks with: (No Item)
-    #     DropPodData(-259577,105048, -1548,  None, 0), # Unlocks with: (No Item)
-    #     DropPodData(275070, -52585, 5980,   None, 0), # Unlocks with: (No Item)
-    #     DropPodData(-247303,-142348,4524,   "Rotor", 0), # Unlocks with: 4 x Desc_Rotor_C
-    #     DropPodData(261797, 124616, -2597,  "AI Limiter", 73), # Unlocks with: 3 x Desc_CircuitBoardHighSpeed_C
-    #     DropPodData(187056, 223656, -3215,  None, 42), # Unlocks with: (No Item)
-    #     DropPodData(293299, 51,     522,    "Crystal Oscillator", 42), # Unlocks with: 8 x Desc_CrystalOscillator_C
-    #     DropPodData(219146, -199880,6503,   "Rotor", 0), # Unlocks with: 10 x Desc_Rotor_C
-    #     DropPodData(176423, 243273, -9780,  "Motor", 19), # Unlocks with: 3 x Desc_Motor_C
-    #     DropPodData(291821, 74782, -1574,  "Superposition Oscillator", self.state_logic, , 0), # Unlocks with: 5 x Desc_QuantumOscillator_C
-    #     DropPodData(-78884, 292640, -4763,  "Modular Frame", 0), # Unlocks with: 5 x Desc_ModularFrame_C
-    #     DropPodData(174948, -276436,21151,  "Motor", 0), # Unlocks with: 30 x Desc_Motor_C
-    #     DropPodData(295166, -173139,8083,   None, 0), # Unlocks with: (No Item)
-    #     DropPodData(349295, -38831, -1485,  "Motor", 0), # Unlocks with: 10 x Desc_Motor_C
-    #     DropPodData(360114, -106614,11815,  "Motor", 0), # Unlocks with: 35 x Desc_Motor_C
-    #     DropPodData(303169, -246169,5487,   None, 50), # Unlocks with: (No Item)
-    #     DropPodData(236508, -312236,9971,   "Motor", 0), # Unlocks with: 30 x Desc_Motor_C
-    #     DropPodData(360285, -217558,3900,   None, 70), # Unlocks with: (No Item)
-    #     DropPodData(366637, -303548,-7288,  None, 0), # Unlocks with: (No Item)
-    # ]
+    drop_pods: List[DropPodData] = [
+        # Regenerate via /Script/Engine.Blueprint'/Archipelago/Debug/CC_BuildDropPodLocations.CC_BuildDropPodLocations' 
+        DropPodData(-29068, -22640, 17384,  "Encased Industrial Beam", 0), # Unlocks with: 4 x Desc_SteelPlateReinforced_C
+        DropPodData(-33340, 5176,   23519,  "Crystal Oscillator", 0), # Unlocks with: 5 x Desc_CrystalOscillator_C
+        DropPodData(8680,   -41777, 13053,  "Steel Pipe", 0), # Unlocks with: 7 x Desc_SteelPipe_C
+        DropPodData(35082,  16211,  22759,  "Supercomputer", 0), # Unlocks with: 7 x Desc_ComputerSuper_C
+        #DropPodData(-3511, 62314,  22109,  "Quantum Computer", 0), # Unlocks with: 1 x Desc_ComputerQuantum_C
+        DropPodData(66652,  -13642, 13420,  "Encased Industrial Beam", 50), # Unlocks with: 3 x Desc_SteelPlateReinforced_C
+        DropPodData(55247,  -51316, 14363,  None, 25), # Unlocks with: (No Item)
+        DropPodData(-4706,  -76301, 13618,  "Black Powder", 0), # Unlocks with: 10 x Desc_Gunpowder_C
+        DropPodData(-40194,62956,  26261,  "Superposition Oscillator", 138), # Unlocks with: 2 x Desc_QuantumOscillator_C
+        DropPodData(80980,  -44100, 8303,   "Rotor", 0), # Unlocks with: 3 x Desc_Rotor_C
+        DropPodData(-56144, -72864, 27668,  "Quartz Crystal", 0), # Unlocks with: 2 x Desc_QuartzCrystal_C
+        DropPodData(-95228, 6970,   25142,  "High-Speed Connector", 112), # Unlocks with: 11 x Desc_HighSpeedConnector_C
+        DropPodData(-89284, -50630, 16019,  None, 50), # Unlocks with: (No Item)
+        DropPodData(-94708, 40337,  19832,  "Heat Sink", 138), # Unlocks with: 2 x Desc_AluminumPlateReinforced_C
+        DropPodData(94267,  47237,  9435,   "Motor", 0), # Unlocks with: 1 x Desc_Motor_C
+        DropPodData(87739,  -62975, 13444,  None, 30), # Unlocks with: (No Item)
+        DropPodData(12249,  114177, 26721,  "AI Limiter", 267), # Unlocks with: 9 x Desc_CircuitBoardHighSpeed_C
+        DropPodData(115978, 21424,  15519,  None, 0), # Unlocks with: (No Item)
+        DropPodData(-78236, 90857,  20305,  "Radio Control Unit", 0), # Unlocks with: 6 x Desc_ModularFrameLightweight_C
+        DropPodData(-35359, 116594, 21827,  "Turbo Motor", 0), # Unlocks with: 6 x Desc_MotorLightweight_C
+        DropPodData(111479, -54515, 17081,  "Stator", 20), # Unlocks with: 1 x Desc_Stator_C
+        DropPodData(121061, 45324,  17373,  None, 0), # Unlocks with: (No Item)
+        DropPodData(125497, -34949, 8220,   None, 50), # Unlocks with: (No Item)
+        DropPodData(-26327, -129047,7780,   "Modular Frame", 0), # Unlocks with: 1 x Desc_ModularFrame_C
+        DropPodData(21373,  132336, 2510,   "Motor", 20), # Unlocks with: 2 x Desc_Motor_C
+        DropPodData(17807,  -136922,13621,  "Rotor", 0), # Unlocks with: 1 x Desc_Rotor_C
+        DropPodData(-118480,74929,  16995,  None, 420), # Unlocks with: (No Item)
+        DropPodData(94940,  105482, 9860,   "Heavy Modular Frame", 0), # Unlocks with: 1 x Desc_ModularFrameHeavy_C
+        DropPodData(-129115,60165,  4800,   None, 53), # Unlocks with: (No Item)
+        DropPodData(-142000,23970,  32660,  None, 0), # Unlocks with: (No Item)
+        DropPodData(46048,  141933, 13064,  None, 40), # Unlocks with: (No Item)
+        DropPodData(144456, 36294,  17301,  "Circuit Board", 48), # Unlocks with: 20 x Desc_CircuitBoard_C
+        DropPodData(-43144, 145820, 7472,   "Modular Frame", 0), # Unlocks with: 5 x Desc_ModularFrame_C
+        DropPodData(-108774,107811, 10154,  "Crystal Oscillator", 0), # Unlocks with: 1 x Desc_CrystalOscillator_C
+        DropPodData(-56987, -144603,2072,   "Rotor", 10), # Unlocks with: 1 x Desc_Rotor_C
+        DropPodData(-152676,33864,  19283,  None, 256), # Unlocks with: (No Item)
+        DropPodData(90313,  129583, 9112,   "Crystal Oscillator", 20), # Unlocks with: 2 x Desc_CrystalOscillator_C
+        DropPodData(111212, -113040,12036,  "Screw", 10), # Unlocks with: 15 x Desc_IronScrew_C
+        DropPodData(-157077,-6312,  25128,  "Turbo Motor", 0), # Unlocks with: 8 x Desc_MotorLightweight_C
+        DropPodData(157249, -40206, 13694,  "High-Speed Connector", 0), # Unlocks with: 2 x Desc_HighSpeedConnector_C
+        DropPodData(-151842,72468,  9945,   "Encased Industrial Beam", 0), # Unlocks with: 3 x Desc_SteelPlateReinforced_C
+        DropPodData(64696,  156038, 14067,  "Modular Frame", 0), # Unlocks with: 6 x Desc_ModularFrame_C
+        DropPodData(-157080,-67028, 11766,  "Rotor", 0), # Unlocks with: 4 x Desc_Rotor_C
+        DropPodData(170057, -10579, 18823,  None, 50), # Unlocks with: (No Item)
+        DropPodData(143671, 92573,  24990,  "Crystal Oscillator", 20), # Unlocks with: 2 x Desc_CrystalOscillator_C
+        DropPodData(127215, -116866,-1397,  "Rubber", 0), # Unlocks with: 10 x Desc_Rubber_C
+        DropPodData(163999, 61333,  21481,  "AI Limiter", 0), # Unlocks with: 3 x Desc_CircuitBoardHighSpeed_C
+        DropPodData(98306,  -149781,2552,   None, 40), # Unlocks with: (No Item)
+        DropPodData(5302,   -187090,-1608,  None, 0), # Unlocks with: (No Item)
+        DropPodData(188304, 17059,  12949,  None, 0), # Unlocks with: (No Item)
+        DropPodData(84256,  -171122,-290,   None, 0), # Unlocks with: (No Item)
+        DropPodData(191366, 37694,  5676,   "Computer", 0), # Unlocks with: 4 x Desc_Computer_C
+        DropPodData(28695,  193441, 17459,  "Quickwire", 0), # Unlocks with: 9 x Desc_HighSpeedWire_C
+        DropPodData(-146044,-137047,2357,   "Modular Frame", 0), # Unlocks with: 9 x Desc_ModularFrame_C
+        DropPodData(-200203,-17766, 12193,  "Solid Biofuel", 0), # Unlocks with: 10 x Desc_Biofuel_C
+        DropPodData(47834,  195703, 2943,   "Black Powder", 0), # Unlocks with: 4 x Desc_Gunpowder_C
+        DropPodData(198418, -41186, 13786,  None, 0), # Unlocks with: (No Item)
+        DropPodData(-195756,-59210, -84,    None, 30), # Unlocks with: (No Item)
+        DropPodData(-121994,166916, -49,    "Steel Beam", 20), # Unlocks with: 4 x Desc_SteelPlate_C
+        DropPodData(88323,  188913, 1420,   None, 30), # Unlocks with: (No Item)
+        DropPodData(-123677,-167107,29710,  "Motor", 0), # Unlocks with: 4 x Desc_Motor_C
+        DropPodData(150633, 146698, 7727,   "Crystal Oscillator", 20), # Unlocks with: 2 x Desc_CrystalOscillator_C
+        DropPodData(-55111, -204857,7844,   "Motor", 0), # Unlocks with: 30 x Desc_Motor_C
+        DropPodData(216096, -268,   -1592,  "Heat Sink", 0), # Unlocks with: 7 x Desc_AluminumPlateReinforced_C
+        DropPodData(159088, -145116,23164,  "Motor", 0), # Unlocks with: 30 x Desc_Motor_C
+        DropPodData(207683, -68352, 3927,   "Encased Industrial Beam", 20), # Unlocks with: 27 x Desc_SteelPlateReinforced_C
+        DropPodData(-189258,116331, -1764,  None, 0), # Unlocks with: (No Item)
+        DropPodData(46951,  221859, 5917,   None, 20), # Unlocks with: (No Item)
+        DropPodData(-9988,  227625, -1017,  None, 40), # Unlocks with: (No Item)
+        DropPodData(232515, -20519, 8979,   "Crystal Oscillator", 15), # Unlocks with: 2 x Desc_CrystalOscillator_C
+        DropPodData(232138,27191,  -1629,  "Supercomputer", 0), # Unlocks with: 5 x Desc_ComputerSuper_C
+        DropPodData(-135,   -237257,-1760,  None, 0), # Unlocks with: (No Item)
+        DropPodData(-232498,-51432, -386,   "Rotor", 0), # Unlocks with: 21 x Desc_Rotor_C
+        DropPodData(-238333,17321,  19741,  "Heat Sink", 0), # Unlocks with: 3 x Desc_AluminumPlateReinforced_C
+        DropPodData(200510, 131912, 6341,   "Motor", 0), # Unlocks with: 30 x Desc_Motor_C
+        DropPodData(-108812,214051, 3200,   "Quickwire", 0), # Unlocks with: 1 x Desc_HighSpeedWire_C
+        DropPodData(232255, 79925,  -1275,  "Turbo Motor", 67), # Unlocks with: 2 x Desc_MotorLightweight_C
+        DropPodData(226418, 98109,  7339,   None, 200), # Unlocks with: (No Item)
+        DropPodData(156569, 191767, -9312,  "Rubber", 0), # Unlocks with: 4 x Desc_Rubber_C
+        DropPodData(44579,  -244343,-874,   None, 0), # Unlocks with: (No Item)
+        DropPodData(118349, 221905, -7063,  "Encased Industrial Beam", 0), # Unlocks with: 6 x Desc_SteelPlateReinforced_C
+        #DropPodData(249919,59534,  2430,   "Quantum Computer", 0), # Unlocks with: 1 x Desc_ComputerQuantum_C
+        DropPodData(188233, 177201, 9608,   "Quickwire", 0), # Unlocks with: 12 x Desc_HighSpeedWire_C
+        DropPodData(-174494,-197134,-1538,  None, 30), # Unlocks with: (No Item)
+        DropPodData(-50655, -259272,-1667,  None, 0), # Unlocks with: (No Item)
+        DropPodData(30383,  266975, -987,   "Screw", 0), # Unlocks with: 12 x Desc_IronScrew_C
+        DropPodData(272715, 28087,  -1586,  "Supercomputer", 0), # Unlocks with: 2 x Desc_ComputerSuper_C
+        DropPodData(-152279,229520,1052,   "Modular Frame", 0), # Unlocks with: 5 x Desc_ModularFrame_C
+        DropPodData(241532, 131343, 17157,  None, 0), # Unlocks with: (No Item)
+        DropPodData(-259577,105048, -1548,  None, 0), # Unlocks with: (No Item)
+        DropPodData(275070, -52585, 5980,   None, 0), # Unlocks with: (No Item)
+        DropPodData(-247303,-142348,4524,   "Rotor", 0), # Unlocks with: 4 x Desc_Rotor_C
+        DropPodData(261797, 124616, -2597,  "AI Limiter", 73), # Unlocks with: 3 x Desc_CircuitBoardHighSpeed_C
+        DropPodData(187056, 223656, -3215,  None, 42), # Unlocks with: (No Item)
+        DropPodData(293299, 51,     522,    "Crystal Oscillator", 42), # Unlocks with: 8 x Desc_CrystalOscillator_C
+        DropPodData(219146, -199880,6503,   "Rotor", 0), # Unlocks with: 10 x Desc_Rotor_C
+        DropPodData(176423, 243273, -9780,  "Motor", 19), # Unlocks with: 3 x Desc_Motor_C
+        DropPodData(291821, 74782, -1574,  "Superposition Oscillator", 0), # Unlocks with: 5 x Desc_QuantumOscillator_C
+        DropPodData(-78884, 292640, -4763,  "Modular Frame", 0), # Unlocks with: 5 x Desc_ModularFrame_C
+        DropPodData(174948, -276436,21151,  "Motor", 0), # Unlocks with: 30 x Desc_Motor_C
+        DropPodData(295166, -173139,8083,   None, 0), # Unlocks with: (No Item)
+        DropPodData(349295, -38831, -1485,  "Motor", 0), # Unlocks with: 10 x Desc_Motor_C
+        DropPodData(360114, -106614,11815,  "Motor", 0), # Unlocks with: 35 x Desc_Motor_C
+        DropPodData(303169, -246169,5487,   None, 50), # Unlocks with: (No Item)
+        DropPodData(236508, -312236,9971,   "Motor", 0), # Unlocks with: 30 x Desc_Motor_C
+        DropPodData(360285, -217558,3900,   None, 70), # Unlocks with: (No Item)
+        DropPodData(366637, -303548,-7288,  None, 0), # Unlocks with: (No Item)
+    ]
 
 
