@@ -290,6 +290,8 @@ class Locations():
             MamSlot("Alien Technology", "Alien Power Matrix", 1338593),
             # 1.0
 
+            # 1338600 - 1338699 - Harddrives - Harddrives
+
             ShopSlot(self.state_logic, 1, 3, 1338700),
             ShopSlot(self.state_logic, 2, 3, 1338701),
             ShopSlot(self.state_logic, 3, 5, 1338702),
@@ -320,7 +322,7 @@ class Locations():
 
         location_table = self.get_base_location_table()
         location_table.extend(self.get_hub_locations())
-        #location_table.extend(self.get_drop_pod_locations())
+        location_table.extend(self.get_drop_pod_locations())
         location_table.extend(self.get_logical_event_locations())
 
         return location_table
