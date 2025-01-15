@@ -309,7 +309,7 @@ class Locations():
 
         location_table = self.get_base_location_table()
         location_table.extend(self.get_hub_locations())
-        #location_table.extend(self.get_drop_pod_locations())
+        location_table.extend(self.get_drop_pod_locations())
         location_table.append(LocationData("Overworld", "UpperBound", 1338999))
 
         return {location.name: location.code for location in location_table}
