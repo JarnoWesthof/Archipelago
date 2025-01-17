@@ -42,7 +42,7 @@ class ChoiceMap(Choice, metaclass=ChoiceMapMeta):
 
 
 class ElevatorTier(NamedRange):
-    """Ship these Space Elevator packages to finish"""
+    """Ship these Space Elevator packages to finish. Does nothing if *Space Elevator Tier* goal is not selected."""
     display_name = "Goal: Space Elevator shipment"
     default = 2
     range_start = 1
@@ -56,12 +56,14 @@ class ElevatorTier(NamedRange):
 
 class ResourceSinkPoints(NamedRange):
     """Sink an amount of items totalling this amount of points to finish.
+    Does nothing if *Resource Sink Points* goal is not selected.
 
-    In the base game, it takes 208 coupons to unlock every unique crafting recipe, or 1813 coupons to purchase every non-producible item.
+    In the base game, it takes 347 coupons to unlock every non-repeatable purchase, or 1895 coupons to purchase every non-producible item.
 
-    Use the TFIT mod or the Satisfactory wiki to find out how many points items are worth.
+    Use the **TFIT** mod or the Satisfactory wiki to find out how many points items are worth.
 
-    If you have Free Samples enabled, consider setting this higher so that you can't reach the goal just by sinking your Free Samples."""
+    If you have *Free Samples* enabled, consider setting this higher so that you can't reach the goal just by sinking your Free Samples."""
+    # Coupon data for above comment from https://satisfactory.wiki.gg/wiki/AWESOME_Shop
     display_name = "Goal: AWESOME Sink points"
     default = 2166000
     range_start = 2166000
@@ -90,13 +92,13 @@ class ResourceSinkPoints(NamedRange):
     }
 
 class HardDriveProgressionLimit(Range):
-    """How many Hard-drive scans can contain progression items.
-    Hard-drive scans above this threshold cannot contain progression but can still be useful"""
-    display_name = "Max Hard-drive Progression"
+    """How many Hard Drives can contain progression items.
+    Hard Drives above this count cannot contain progression, but can still be useful. (TODO AP useful or nice-to-have useful?)
+    There are TODO total hard drives."""
+    display_name = "Hard Drive Progression Items"
     default = 0
     range_start = 0
-    range_end = 100
-    visibility = Visibility.none # its WIP
+    range_end = 100 # TODO what is the max # of hard drives?
 
 class FreeSampleEquipment(Range):
     """How many free sample items of Equipment items should be given when they are unlocked.
@@ -140,9 +142,13 @@ class FreeSampleRadioactive(Toggle):
     display_name = "Free Samples: Radioactive"
 
 class TrapChance(Range):
-    """Chance of traps in the item pool.
+    """
+    Chance of traps in the item pool.
     Traps will only replace filler items such as parts and resources.
-    0 means no traps will be present, 100 means every filler will be a trap."""
+    
+    - **0:** No traps will be present
+    - **100:** Every filler item will be a trap.
+    """
     display_name = "Trap Chance"
     range_start = 0
     range_end = 100
@@ -151,11 +157,11 @@ class TrapChance(Range):
 class TrapSelectionPreset(ChoiceMap):
     """Themed presets of trap types to enable.
 
-    If you want more control, visit the Weighted Options page or edit the YAML directly."""
+    If you want more control, use *Trap Override* or visit the Weighted Options page."""
     display_name = "Trap Presets"
     choices = {
-        "Gentle": ["Doggo Pulse Nobelisk", "Hog Basic", "Spitter Forest"],
         "Normal": ["Doggo Pulse Nobelisk", "Doggo Gas Nobelisk", "Hog Basic", "Hog Alpha", "Hatcher", "Stinger Small", "Stinger Elite", "Spitter Forest", "Spitter Forest Alpha", "Not The Bees", "Nuclear Waste (ground)", "Bundle: Uranium", "Bundle: Non-fissile Uranium"],
+        "Gentle": ["Doggo Pulse Nobelisk", "Hog Basic", "Spitter Forest"],
         "Harder": ["Doggo Pulse Nobelisk", "Doggo Nuke Nobelisk", "Doggo Gas Nobelisk", "Hog Alpha", "Hatcher", "Stinger Elite", "Spitter Forest Alpha", "Not The Bees", "Nuclear Waste (ground)", "Plutonium Waste (ground)", "Bundle: Uranium", "Bundle: Uranium Fuel Rod", "Bundle: Uranium Waste", "Bundle: Plutonium Fuel Rod", "Bundle: Plutonium Pellet", "Bundle: Plutonium Waste", "Bundle: Non-fissile Uranium"],
         "All": ["Doggo Pulse Nobelisk", "Doggo Nuke Nobelisk", "Doggo Gas Nobelisk", "Hog Basic", "Hog Alpha", "Hog Cliff", "Hog Cliff Nuclear", "Hog Johnny", "Hatcher", "Stinger Small", "Stinger Elite", "Stinger Gas", "Spore Flower", "Spitter Forest", "Spitter Forest Alpha", "Not The Bees", "Nuclear Waste (ground)", "Plutonium Waste (ground)", "Bundle: Uranium", "Bundle: Uranium Fuel Rod", "Bundle: Uranium Waste", "Bundle: Plutonium Fuel Rod", "Bundle: Plutonium Pellet", "Bundle: Plutonium Waste", "Bundle: Non-fissile Uranium", "Bundle: Ficsonium", "Bundle: Ficsonium Fuel Rod"],
         "Ruthless": ["Doggo Nuke Nobelisk", "Hog Cliff Nuclear", "Hog Cliff", "Spore Flower", "Stinger Gas", "Nuclear Waste (ground)", "Plutonium Waste (ground)", "Bundle: Uranium", "Bundle: Uranium Fuel Rod", "Bundle: Uranium Waste", "Bundle: Plutonium Fuel Rod", "Bundle: Plutonium Pellet", "Bundle: Plutonium Waste", "Bundle: Non-fissile Uranium", "Bundle: Ficsonium", "Bundle: Ficsonium Fuel Rod"],
@@ -164,10 +170,13 @@ class TrapSelectionPreset(ChoiceMap):
         "Nicholas Cage": ["Hatcher", "Not The Bees"],
         "Fallout": ["Doggo Nuke Nobelisk", "Hog Cliff Nuclear", "Nuclear Waste (ground)", "Plutonium Waste (ground)", "Bundle: Uranium"],
     }
-    default="Normal"
+    default="Normal" # TODO `default` doesn't do anything, default is always the first `choices` value
 
 class TrapSelectionOverride(OptionSet):
-    """Precise list of traps that may be in the item pool to find. If you select anything with this option it will be used instead of the 'Trap Presets' setting."""
+    """
+    Precise list of traps that may be in the item pool to find.
+    If you select anything with this option it will be used instead of the *Trap Presets* setting.
+    """
     display_name = "Trap Override"
     valid_keys = {
         "Doggo Pulse Nobelisk", 
@@ -263,26 +272,29 @@ class StartingInventoryPreset(ChoiceMap):
     """
     display_name = "Starting Goodies Presets"
     choices = {
+        "Archipelago": _default_starting_items,
         "Barebones": [], # Nothing but the default xeno zapper
         "Skip Tutorial Inspired": _skip_tutorial_starting_items,
-        "Archipelago": _default_starting_items,
         "Foundations": _default_plus_foundations_starting_items,
         "Foundation Lover": _default_plus_foundations_starting_items + ["Bundle: Iron Plate", "Bundle: Iron Plate", "Bundle: Iron Plate", "Bundle: Concrete", "Bundle: Concrete", "Bundle: Concrete"],
     }
-    default = "Archipelago"
+    default = "Archipelago" # TODO `default` doesn't do anything, default is always the first `choices` value
 
 # options.py
 class GoalSelection(OptionSet):
     """What will be your goal(s)?
-    Selecting "Complete 1 Goal only" means your game will complete with either goal, otherwise all selected goals must be completed
+    Configure them further with other options.
+    Selecting "Complete 1 Goal only" means your game will complete with either goal, otherwise all selected goals must be completed.
     """
     display_name = "Select your Goals"
     valid_keys = {
-        "Space elevator tier",
-        "Resource sink points",
+        "Space Elevator Tier",
+        "Resource Sink Points",
+        # "Exploration",
+        # "FICSMAS Tree",
         "Complete 1 Goal only"
     }
-    default = {"Space elevator tier"}
+    default = {"Space Elevator Tier"}
 
 class ExperimentalGeneration(Toggle):
     """Attempts to only mark recipes as progression if they are on your path to victory
