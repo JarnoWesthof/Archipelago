@@ -1,4 +1,4 @@
-from typing import Dict, List, Set, TextIO, ClassVar, Tuple, Counter
+from typing import Dict, List, Set, TextIO, ClassVar, Tuple
 from BaseClasses import Item, MultiWorld, ItemClassification, CollectionState
 from .GameLogic import GameLogic
 from .Items import Items
@@ -136,6 +136,7 @@ class SatisfactoryWorld(World):
                 "SlotsPerMilestone": self.game_logic.slots_per_milestone,
                 "Options": {
                     "GoalSelection": self.options.goal_selection.value,
+                    "GoalRequirement": self.options.goal_requirement.value,
                     "FinalElevatorTier": self.options.final_elevator_package.value,
                     "FinalResourceSinkPoints": self.options.final_resource_sink_points.value,
                     "EnableHardDriveGacha": True if self.options.hard_drive_progression_limit else False,

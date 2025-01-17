@@ -280,7 +280,6 @@ class StartingInventoryPreset(ChoiceMap):
     }
     default = "Archipelago" # TODO `default` doesn't do anything, default is always the first `choices` value
 
-# options.py
 class GoalSelection(OptionSet):
     """What will be your goal(s)?
     Configure them further with other options.
@@ -292,9 +291,15 @@ class GoalSelection(OptionSet):
         "Resource Sink Points",
         # "Exploration",
         # "FICSMAS Tree",
-        "Complete 1 Goal only"
     }
     default = {"Space Elevator Tier"}
+
+class GoalRequirement(Choice):
+    """Used in combination with the Goal Selection, what goals are required"""
+    display_name = "Goal Requirements"
+    option_require_any_one_goal = 0
+    option_require_all_goals = 1
+    default = 0
 
 class ExperimentalGeneration(Toggle):
     """Attempts to only mark recipes as progression if they are on your path to victory
@@ -305,6 +310,7 @@ class ExperimentalGeneration(Toggle):
 @dataclass
 class SatisfactoryOptions(PerGameCommonOptions):
     goal_selection: GoalSelection
+    goal_requirement: GoalRequirement
     final_elevator_package: ElevatorTier
     final_resource_sink_points: ResourceSinkPoints
     hard_drive_progression_limit: HardDriveProgressionLimit
