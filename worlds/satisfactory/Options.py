@@ -42,7 +42,10 @@ class ChoiceMap(Choice, metaclass=ChoiceMapMeta):
 
 
 class ElevatorTier(NamedRange):
-    """Ship these Space Elevator packages to finish. Does nothing if *Space Elevator Tier* goal is not selected."""
+    """
+    Ship these Space Elevator packages to finish.
+    Does nothing if *Space Elevator Tier* goal is not enabled.
+    """
     display_name = "Goal: Space Elevator shipment"
     default = 2
     range_start = 1
@@ -55,14 +58,16 @@ class ElevatorTier(NamedRange):
     }
 
 class ResourceSinkPoints(NamedRange):
-    """Sink an amount of items totalling this amount of points to finish.
-    Does nothing if *Resource Sink Points* goal is not selected.
+    """
+    Sink an amount of items totalling this amount of points to finish.
+    Does nothing if *Resource Sink Points* goal is not enabled.
 
     In the base game, it takes 347 coupons to unlock every non-repeatable purchase, or 1895 coupons to purchase every non-producible item.
 
-    Use the **TFIT** mod or the Satisfactory wiki to find out how many points items are worth.
+    Use the **TFIT - Ficsit Information Tool** mod or the Satisfactory wiki to find out how many points items are worth.
 
-    If you have *Free Samples* enabled, consider setting this higher so that you can't reach the goal just by sinking your Free Samples."""
+    If you have *Free Samples* enabled, consider setting this higher so that you can't reach the goal just by sinking your Free Samples.
+    """
     # Coupon data for above comment from https://satisfactory.wiki.gg/wiki/AWESOME_Shop
     display_name = "Goal: AWESOME Sink points"
     default = 2166000
@@ -92,36 +97,49 @@ class ResourceSinkPoints(NamedRange):
     }
 
 class HardDriveProgressionLimit(Range):
-    """How many Hard Drives can contain progression items.
+    """
+    How many Hard Drives can contain progression items.
     Hard Drives above this count cannot contain progression, but can still be useful. (TODO AP useful or nice-to-have useful?)
-    There are TODO total hard drives."""
+    
+    There are TODO total hard drives.
+    """
     display_name = "Hard Drive Progression Items"
     default = 0
     range_start = 0
     range_end = 100 # TODO what is the max # of hard drives?
 
 class FreeSampleEquipment(Range):
-    """How many free sample items of Equipment items should be given when they are unlocked.
-    (ex. Jetpack, Rifle)"""
+    """
+    How many free sample items of Equipment items should be given when they are unlocked.
+    
+    (ex. Jetpack, Rifle)
+    """
     display_name = "Free Samples: Equipment"
     default = 1
     range_start = 0
     range_end = 10
 
 class FreeSampleBuildings(Range):
-    """How many copies of a Building's construction cost to give as a free sample when they are unlocked.
+    """
+    How many copies of a Building's construction cost to give as a free sample when they are unlocked.
     Space Elevator is always excluded.
-    (ex. Packager, Constructor, Smelter)"""
+    
+    (ex. Packager, Constructor, Smelter)
+    """
     display_name = "Free Samples: Buildings"
     default = 5
     range_start = 0
     range_end = 10
 
 class FreeSampleParts(NamedRange):
-    """How free sample items of general crafting components should be given when a recipe for them is unlocked.
+    """
+    How free sample items of general crafting components should be given when a recipe for them is unlocked.
     Space Elevator Project Parts are always excluded.
+    
     Negative numbers mean that fraction of a full stack.
-    (ex. Iron Plate, Packaged Turbofuel, Reinforced Modular Frame)"""
+    
+    (ex. Iron Plate, Packaged Turbofuel, Reinforced Modular Frame)
+    """
     display_name = "Free Samples: Parts"
     default = -2
     range_start = -5
@@ -138,7 +156,10 @@ class FreeSampleParts(NamedRange):
     }
 
 class FreeSampleRadioactive(Toggle):
-    """Allow free samples to include radioactive parts. Remember, they are delivered directly to your player inventory."""
+    """
+    Allow free samples to include radioactive parts.
+    Remember, they are delivered directly to your player inventory.
+    """
     display_name = "Free Samples: Radioactive"
 
 class TrapChance(Range):
@@ -155,9 +176,11 @@ class TrapChance(Range):
     default = 10
 
 class TrapSelectionPreset(ChoiceMap):
-    """Themed presets of trap types to enable.
+    """
+    Themed presets of trap types to enable.
 
-    If you want more control, use *Trap Override* or visit the Weighted Options page."""
+    If you want more control, use *Trap Override* or visit the Weighted Options page.
+    """
     display_name = "Trap Presets"
     choices = {
         "Normal": ["Doggo Pulse Nobelisk", "Doggo Gas Nobelisk", "Hog Basic", "Hog Alpha", "Hatcher", "Stinger Small", "Stinger Elite", "Spitter Forest", "Spitter Forest Alpha", "Not The Bees", "Nuclear Waste (ground)", "Bundle: Uranium", "Bundle: Non-fissile Uranium"],
@@ -188,6 +211,7 @@ class TrapSelectionOverride(OptionSet):
         "Hog Cliff Nuclear",
         "Hog Johnny",
         "Hatcher",
+        # "Hatcher Elite", # TODO add this to the trap presets and other trap logic
         "Stinger Small",
         "Stinger Elite",
         "Stinger Gas",
@@ -210,32 +234,47 @@ class TrapSelectionOverride(OptionSet):
     default = {}
 
 class EnergyLink(Toggle):
-    """Allow sending energy to other worlds. TODO% of the energy is lost in the transfer."""
+    """
+    Allow transferring energy to and from other worlds using the Power Storage building.
+    TODO% of the energy is lost in the transfer.
+    """
     display_name = "EnergyLink"
 
 class MamLogic(PlacementLogic):
-    """Where to place the MAM building in logic. Earlier means it will be more likely you need to interact with it for progression purposes."""
+    """
+    Where to place the MAM building in logic.
+    Earlier means it will be more likely you need to interact with it for progression purposes.
+    """
     display_name = "MAM Placement"
     default = Placement.early
 
 class AwesomeLogic(PlacementLogic):
-    """Where to place the AWESOME Shop and Sink buildings in logic. Earlier means it will be more likely you need to interact with it for progression purposes."""
+    """
+    Where to place the AWESOME Shop and Sink buildings in logic.
+    Earlier means it will be more likely you need to interact with it for progression purposes.
+    """
     display_name = "AWESOME Stuff Placement"
     default = Placement.early
 
 class EnergyLinkLogic(PlacementLogic):
-    """Where to place the EnergyLink building (or Power Storage if EnergyLink is disabled) in logic. Earlier means it will be more likely to get access to it early into your game."""
+    """
+    Where to place the EnergyLink building (or Power Storage if EnergyLink is disabled) in logic.
+    Earlier means it will be more likely to get access to it early into your game.
+    """
     display_name = "EnergyLink Placement"
     default = Placement.early
 
 class SplitterLogic(PlacementLogic):
-    """Where to place the Conveyor Splitter and Merger buildings in logic. Earlier means it will be more likely to get access to it early into your game."""
+    """
+    Where to place the Conveyor Splitter and Merger buildings in logic.
+    Earlier means it will be more likely to get access to it early into your game.
+    """
     display_name = "Splitter and Merger Placement"
     default = Placement.starting_inventory
 
 _skip_tutorial_starting_items = [
     # https://satisfactory.wiki.gg/wiki/Onboarding
-    "Bundle: Portable Miner", "Bundle: Portable Miner", "Bundle: Portable Miner", "Bundle: Portable Miner",
+    "Bundle: Portable Miner",
     "Bundle: Iron Plate",
     "Bundle: Concrete",
     "Bundle: Iron Rod",
@@ -245,7 +284,6 @@ _skip_tutorial_starting_items = [
 ]
 
 _default_starting_items = _skip_tutorial_starting_items + [
-    "Bundle: Portable Miner",
     "Bundle: Iron Ingot",
     "Bundle: Copper Ingot",
     "Bundle: Concrete",
@@ -260,30 +298,36 @@ _default_plus_foundations_starting_items = _default_starting_items + [
     "Building: Half Foundation"
 ]
 
+_foundation_lover_starting_items = _default_plus_foundations_starting_items + [
+    "Bundle: Iron Plate", "Bundle: Iron Plate", "Bundle: Iron Plate",
+    "Bundle: Concrete", "Bundle: Concrete", "Bundle: Concrete"
+]
+
 class StartingInventoryPreset(ChoiceMap):
-    """What resources (and buildings) the player should start with in their inventory.
+    """
+    What resources (and buildings) the player should start with in their inventory.
     If you want more control, visit the Weighted Options page or edit the YAML directly.
 
-    Barebones: Nothing but the default xeno zapper and buildings.
-    Skip Tutorial Inspired: Inspired by the items you would have if you skipped the base game's tutorial.
-    Archipelago: The starting items we think will lead to a fun experience.
-    Foundations: 'Archipelago' option, but also guaranteeing that you have foundations unlocked at the start.
-    Foundation Lover: You really like foundations.
+    - **Barebones**: Nothing but the default xeno zapper and buildings.
+    - **Skip Tutorial Inspired**: Inspired by the items you would have if you skipped the base game's tutorial.
+    - **Archipelago**: The starting items we think will lead to a fun experience.
+    - **Foundations**: 'Archipelago' option, but also guaranteeing that you have foundations unlocked at the start.
+    - **Foundation Lover**: You really like foundations.
     """
     display_name = "Starting Goodies Presets"
     choices = {
         "Archipelago": _default_starting_items,
-        "Barebones": [], # Nothing but the default xeno zapper
+        "Barebones": [], # Nothing but the xeno zapper
         "Skip Tutorial Inspired": _skip_tutorial_starting_items,
         "Foundations": _default_plus_foundations_starting_items,
-        "Foundation Lover": _default_plus_foundations_starting_items + ["Bundle: Iron Plate", "Bundle: Iron Plate", "Bundle: Iron Plate", "Bundle: Concrete", "Bundle: Concrete", "Bundle: Concrete"],
+        "Foundation Lover": _foundation_lover_starting_items
     }
     default = "Archipelago" # TODO `default` doesn't do anything, default is always the first `choices` value
 
 class GoalSelection(OptionSet):
-    """What will be your goal(s)?
+    """
+    What will be your goal(s)?
     Configure them further with other options.
-    Selecting "Complete 1 Goal only" means your game will complete with either goal, otherwise all selected goals must be completed.
     """
     display_name = "Select your Goals"
     valid_keys = {
@@ -295,15 +339,19 @@ class GoalSelection(OptionSet):
     default = {"Space Elevator Tier"}
 
 class GoalRequirement(Choice):
-    """Used in combination with the Goal Selection, what goals are required"""
+    """
+    Of the goals selected in *Select your Goals*, how many must be reached to complete your slot?
+    """
     display_name = "Goal Requirements"
     option_require_any_one_goal = 0
     option_require_all_goals = 1
     default = 0
 
 class ExperimentalGeneration(Toggle):
-    """Attempts to only mark recipes as progression if they are on your path to victory
-    WARNING: has a very high change of generation failure and should therefor only be used in single player games"""
+    """
+    Attempts to only mark recipes as progression if they are on your path to victory.
+    WARNING: has a very high change of generation failure and should therefore only be used in single player games.
+    """
     display_name = "Experimental Generation"
     visibility = Visibility.none
 
