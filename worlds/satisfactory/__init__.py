@@ -47,8 +47,8 @@ class SatisfactoryWorld(World):
                 raise Exception("""Satisfactory: player {} selected "Space Elevator Tier" as their goal
                     but the option final_elevator_package is not properly set"""
                     .format(self.multiworld.player_name[self.player]))
-        if "Resource Sink Points" in self.options.goal_selection and self.options.final_resource_sink_points.value <= 0:
-                raise Exception("""Satisfactory: player {} selected "Resource Sink Points" as their goal
+        if "AWESOME Sink Points" in self.options.goal_selection and self.options.final_resource_sink_points.value <= 0:
+                raise Exception("""Satisfactory: player {} selected "AWESOME Sink Points" as their goal
                     but the option final_resource_sink_points is not properly set"""
                     .format(self.multiworld.player_name[self.player]))
 
@@ -87,7 +87,7 @@ class SatisfactoryWorld(World):
 
 
     def set_rules(self) -> None:
-        resource_sink_goal: bool = "Resource Sink Points" in self.options.goal_selection
+        resource_sink_goal: bool = "AWESOME Sink Points" in self.options.goal_selection
 
         last_elevator_tier: int = \
             len(self.game_logic.space_elevator_tiers) if resource_sink_goal \

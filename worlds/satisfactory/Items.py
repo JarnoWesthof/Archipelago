@@ -194,7 +194,7 @@ class Items:
         "Inflated Pocket Dimension": ItemData(frozenset({G.Upgrades}), 1338189, C.useful, 5),
         "Expanded Toolbelt": ItemData(frozenset({G.Upgrades}), 1338190, C.useful, 5),
 
-        #1338188 - 1338199 Reserved for future equipment/ammo
+        #1338191 - 1338199 Reserved for future equipment/ammo
 
         #1338200+ Recipes / buildings / schematics
         "Recipe: Reinforced Iron Plate": ItemData(frozenset({G.Recipe}), 1338200, C.progression),
@@ -359,7 +359,6 @@ class Items:
         "Recipe: Copper Powder": ItemData(frozenset({G.Recipe}), 1338359, C.progression),
         "Recipe: Nuclear Pasta": ItemData(frozenset({G.Recipe}), 1338360, C.progression),
         "Recipe: Thermal Propulsion Rocket": ItemData(frozenset({G.Recipe}), 1338361, C.progression),
-        # continue here
         "Recipe: Ficsonium": ItemData(frozenset({G.Recipe}), 1338362), # 1.0
         "Recipe: Ficsonium Fuel Rod": ItemData(frozenset({G.Recipe}), 1338363), # 1.0
         "Recipe: Dark Matter Crystal": ItemData(frozenset({G.Recipe}), 1338364, C.progression), # 1.0
@@ -627,7 +626,7 @@ class Items:
         "Customizer: Caterium Paint Finish": ItemData(frozenset({G.Customizer}), 1338773, C.filler, 0), 
 # 1.0
 
-        #1338767 - 1338799 Reserved for buildings
+        #1338773 - 1338799 Reserved for buildings
 
         # Transports 1338800 - 1338899
         # Drones (including Drone)
@@ -651,27 +650,30 @@ class Items:
         "Transport: Hypertube Wall Support": ItemData(frozenset({G.Transport, G.HyperTubes}), 1338811, C.filler),
         "Transport: Hypertube Wall Hole": ItemData(frozenset({G.Transport, G.HyperTubes}), 1338812, C.filler),
 
-        #1338900 - 1338998 Handled by trap system
+        #1338900 - 1338998 Handled by trap system (includes a few non-trap things)
         # Regenerate via /Script/Blutility.EditorUtilityWidgetBlueprint'/Archipelago/Debug/EU_GenerateTrapIds.EU_GenerateTrapIds'
-        "Hog Basic": ItemData(frozenset({G.Trap}), 1338900, C.trap),
-        "Hog Alpha": ItemData(frozenset({G.Trap}), 1338901, C.trap),
-        "Hog Johnny": ItemData(frozenset({G.Trap}), 1338902, C.trap),
-        "Hog Cliff": ItemData(frozenset({G.Trap}), 1338903, C.trap),
-        "Hog Cliff Nuclear": ItemData(frozenset({G.Trap}), 1338904, C.trap),
-        "Not The Bees": ItemData(frozenset({G.Trap}), 1338905, C.trap),
-        "Hatcher": ItemData(frozenset({G.Trap}), 1338906, C.trap),
-        "Doggo Pulse Nobelisk": ItemData(frozenset({G.Trap}), 1338907, C.trap),
-        "Doggo Nuke Nobelisk": ItemData(frozenset({G.Trap}), 1338908, C.trap),
-        "Doggo with PowerSlug": ItemData(frozenset({G.Parts}), 1338909),
-        "Doggo Gas Nobelisk": ItemData(frozenset({G.Trap}), 1338910, C.trap),
-        "Spore Flower": ItemData(frozenset({G.Trap}), 1338911, C.trap),
-        "Stinger Gas": ItemData(frozenset({G.Trap}), 1338912, C.trap),
-        "Stinger Elite": ItemData(frozenset({G.Trap}), 1338913, C.trap),
-        "Stinger Small": ItemData(frozenset({G.Trap}), 1338914, C.trap),
-        "Spitter Forest": ItemData(frozenset({G.Trap}), 1338915, C.trap),
-        "Spitter Forest Alpha": ItemData(frozenset({G.Trap}), 1338916, C.trap),
-        "Nuclear Waste (ground)": ItemData(frozenset({G.Trap}), 1338917, C.trap),
-        "Plutonium Waste (ground)": ItemData(frozenset({G.Trap}), 1338918, C.trap),
+        "Trap: Hog": ItemData(frozenset({G.Trap}), 1338900, C.trap),
+        "Trap: Alpha Hog": ItemData(frozenset({G.Trap}), 1338901, C.trap),
+        "Trap: Johnny": ItemData(frozenset({G.Trap}), 1338902, C.trap),
+        "Trap: Cliff Hog": ItemData(frozenset({G.Trap}), 1338903, C.trap),
+        "Trap: Nuclear Hog": ItemData(frozenset({G.Trap}), 1338904, C.trap),
+        "Trap: Not the Bees": ItemData(frozenset({G.Trap}), 1338905, C.trap),
+        "Trap: Hatcher": ItemData(frozenset({G.Trap}), 1338906, C.trap),
+        "Trap: Doggo with Pulse Nobelisk": ItemData(frozenset({G.Trap}), 1338907, C.trap),
+        "Trap: Doggo with Nuke Nobelisk": ItemData(frozenset({G.Trap}), 1338908, C.trap),
+        "Doggo with Power Slug": ItemData(frozenset({G.Parts}), 1338909, C.filler),
+        "Trap: Doggo with Gas Nobelisk": ItemData(frozenset({G.Trap}), 1338910, C.trap),
+        "Trap: Spore Flower": ItemData(frozenset({G.Trap}), 1338911, C.trap),
+        "Trap: Stinger": ItemData(frozenset({G.Trap}), 1338912, C.trap),
+        "Trap: Gas Stinger": ItemData(frozenset({G.Trap}), 1338913, C.trap),
+        "Trap: Small Stinger": ItemData(frozenset({G.Trap}), 1338914, C.trap),
+        "Trap: Spitter": ItemData(frozenset({G.Trap}), 1338915, C.trap),
+        "Trap: Alpha Spitter": ItemData(frozenset({G.Trap}), 1338916, C.trap),
+        "Trap: Nuclear Waste Drop": ItemData(frozenset({G.Trap}), 1338917, C.trap),
+        "Trap: Plutonium Waste Drop": ItemData(frozenset({G.Trap}), 1338918, C.trap),
+        "Trap: Elite Hatcher": ItemData(frozenset({G.Trap}), 1338919, C.trap),
+        "Trap: Can of Beans": ItemData(frozenset({G.Trap}), 1338920, C.trap),
+        "Trap: Fart Cloud": ItemData(frozenset({G.Trap}), 1338921, C.trap),
 
         #Item id range upper bound
         "Building: Space Elevator": ItemData(frozenset({G.Building}), 1338999, C.progression)

@@ -60,7 +60,7 @@ class ElevatorTier(NamedRange):
 class ResourceSinkPoints(NamedRange):
     """
     Sink an amount of items totalling this amount of points to finish.
-    Does nothing if *Resource Sink Points* goal is not enabled.
+    Does nothing if *AWESOME Sink Points* goal is not enabled.
 
     In the base game, it takes 347 coupons to unlock every non-repeatable purchase, or 1895 coupons to purchase every non-producible item.
 
@@ -175,52 +175,28 @@ class TrapChance(Range):
     range_end = 100
     default = 10
 
-class TrapSelectionPreset(ChoiceMap):
-    """
-    Themed presets of trap types to enable.
-
-    If you want more control, use *Trap Override* or visit the Weighted Options page.
-    """
-    display_name = "Trap Presets"
-    choices = {
-        "Normal": ["Doggo Pulse Nobelisk", "Doggo Gas Nobelisk", "Hog Basic", "Hog Alpha", "Hatcher", "Stinger Small", "Stinger Elite", "Spitter Forest", "Spitter Forest Alpha", "Not The Bees", "Nuclear Waste (ground)", "Bundle: Uranium", "Bundle: Non-fissile Uranium"],
-        "Gentle": ["Doggo Pulse Nobelisk", "Hog Basic", "Spitter Forest"],
-        "Harder": ["Doggo Pulse Nobelisk", "Doggo Nuke Nobelisk", "Doggo Gas Nobelisk", "Hog Alpha", "Hatcher", "Stinger Elite", "Spitter Forest Alpha", "Not The Bees", "Nuclear Waste (ground)", "Plutonium Waste (ground)", "Bundle: Uranium", "Bundle: Uranium Fuel Rod", "Bundle: Uranium Waste", "Bundle: Plutonium Fuel Rod", "Bundle: Plutonium Pellet", "Bundle: Plutonium Waste", "Bundle: Non-fissile Uranium"],
-        "All": ["Doggo Pulse Nobelisk", "Doggo Nuke Nobelisk", "Doggo Gas Nobelisk", "Hog Basic", "Hog Alpha", "Hog Cliff", "Hog Cliff Nuclear", "Hog Johnny", "Hatcher", "Stinger Small", "Stinger Elite", "Stinger Gas", "Spore Flower", "Spitter Forest", "Spitter Forest Alpha", "Not The Bees", "Nuclear Waste (ground)", "Plutonium Waste (ground)", "Bundle: Uranium", "Bundle: Uranium Fuel Rod", "Bundle: Uranium Waste", "Bundle: Plutonium Fuel Rod", "Bundle: Plutonium Pellet", "Bundle: Plutonium Waste", "Bundle: Non-fissile Uranium", "Bundle: Ficsonium", "Bundle: Ficsonium Fuel Rod"],
-        "Ruthless": ["Doggo Nuke Nobelisk", "Hog Cliff Nuclear", "Hog Cliff", "Spore Flower", "Stinger Gas", "Nuclear Waste (ground)", "Plutonium Waste (ground)", "Bundle: Uranium", "Bundle: Uranium Fuel Rod", "Bundle: Uranium Waste", "Bundle: Plutonium Fuel Rod", "Bundle: Plutonium Pellet", "Bundle: Plutonium Waste", "Bundle: Non-fissile Uranium", "Bundle: Ficsonium", "Bundle: Ficsonium Fuel Rod"],
-        "All Arachnids All the Time": ["Stinger Small", "Stinger Elite", "Stinger Gas"],
-        "Whole Hog": ["Hog Basic", "Hog Alpha", "Hog Cliff", "Hog Cliff Nuclear", "Hog Johnny"],
-        "Nicholas Cage": ["Hatcher", "Not The Bees"],
-        "Fallout": ["Doggo Nuke Nobelisk", "Hog Cliff Nuclear", "Nuclear Waste (ground)", "Plutonium Waste (ground)", "Bundle: Uranium"],
-    }
-    default="Normal" # TODO `default` doesn't do anything, default is always the first `choices` value
-
-class TrapSelectionOverride(OptionSet):
-    """
-    Precise list of traps that may be in the item pool to find.
-    If you select anything with this option it will be used instead of the *Trap Presets* setting.
-    """
-    display_name = "Trap Override"
-    valid_keys = {
-        "Doggo Pulse Nobelisk", 
-        "Doggo Nuke Nobelisk", 
-        "Doggo Gas Nobelisk", 
-        "Hog Basic",
-        "Hog Alpha",
-        "Hog Cliff",
-        "Hog Cliff Nuclear",
-        "Hog Johnny",
-        "Hatcher",
-        # "Hatcher Elite", # TODO add this to the trap presets and other trap logic
-        "Stinger Small",
-        "Stinger Elite",
-        "Stinger Gas",
-        "Spore Flower",
-        "Spitter Forest",
-        "Spitter Forest Alpha",
-        "Not The Bees",
-        "Nuclear Waste (ground)",
-        "Plutonium Waste (ground)",
+_trap_types = {
+        "Trap: Doggo with Pulse Nobelisk", 
+        "Trap: Doggo with Nuke Nobelisk", 
+        "Trap: Doggo with Gas Nobelisk", 
+        "Trap: Hog",
+        "Trap: Alpha Hog",
+        "Trap: Cliff Hog",
+        "Trap: Nuclear Hog",
+        "Trap: Johnny",
+        "Trap: Hatcher",
+        "Trap: Elite Hatcher",
+        "Trap: Small Stinger",
+        "Trap: Stinger",
+        "Trap: Gas Stinger",
+        "Trap: Spore Flower",
+        "Trap: Spitter",
+        "Trap: Alpha Spitter",
+        "Trap: Not the Bees",
+        "Trap: Nuclear Waste Drop",
+        "Trap: Plutonium Waste Drop",
+        "Trap: Can of Beans",
+        "Trap: Fart Cloud",
 
         # Radioactive parts delivered via portal
         "Bundle: Uranium",
@@ -230,7 +206,37 @@ class TrapSelectionOverride(OptionSet):
         "Bundle: Plutonium Pellet",
         "Bundle: Plutonium Waste",
         "Bundle: Non-fissile Uranium",
+        "Bundle: Ficsonium",
+        "Bundle: Ficsonium Fuel Rod"
     }
+
+class TrapSelectionPreset(ChoiceMap):
+    """
+    Themed presets of trap types to enable.
+
+    If you want more control, use *Trap Override* or visit the Weighted Options page.
+    """
+    display_name = "Trap Presets"
+    choices = {
+        "Normal": ["Trap: Doggo with Pulse Nobelisk", "Trap: Doggo with Gas Nobelisk", "Trap: Hog", "Trap: Alpha Hog", "Trap: Hatcher", "Trap: Elite Hatcher", "Trap: Small Stinger", "Trap: Stinger", "Trap: Spitter", "Trap: Alpha Spitter", "Trap: Not the Bees", "Trap: Nuclear Waste Drop", "Bundle: Uranium", "Bundle: Non-fissile Uranium", "Trap: Can of Beans", "Trap: Fart Cloud"],
+        "Gentle": ["Trap: Doggo with Pulse Nobelisk", "Trap: Hog", "Trap: Spitter", "Trap: Can of Beans"],
+        "Harder": ["Trap: Doggo with Pulse Nobelisk", "Trap: Doggo with Nuke Nobelisk", "Trap: Doggo with Gas Nobelisk", "Trap: Alpha Hog", "Trap: Cliff Hog", "Trap: Spore Flower", "Trap: Hatcher", "Trap: Elite Hatcher", "Trap: Stinger", "Trap: Alpha Spitter", "Trap: Not the Bees", "Trap: Fart Cloud", "Trap: Nuclear Waste Drop", "Trap: Plutonium Waste Drop", "Bundle: Uranium", "Bundle: Uranium Fuel Rod", "Bundle: Uranium Waste", "Bundle: Plutonium Fuel Rod", "Bundle: Plutonium Pellet", "Bundle: Plutonium Waste", "Bundle: Non-fissile Uranium"],
+        "All": list(_trap_types),
+        "Ruthless": ["Trap: Doggo with Nuke Nobelisk", "Trap: Nuclear Hog", "Trap: Cliff Hog", "Trap: Elite Hatcher", "Trap: Spore Flower", "Trap: Gas Stinger", "Trap: Nuclear Waste Drop", "Trap: Plutonium Waste Drop", "Bundle: Uranium Fuel Rod", "Bundle: Uranium Waste", "Bundle: Plutonium Fuel Rod", "Bundle: Plutonium Pellet", "Bundle: Plutonium Waste", "Bundle: Non-fissile Uranium", "Bundle: Ficsonium", "Bundle: Ficsonium Fuel Rod"],
+        "All Arachnids All the Time": ["Trap: Small Stinger", "Trap: Stinger", "Trap: Gas Stinger"],
+        "Whole Hog": ["Trap: Hog", "Trap: Alpha Hog", "Trap: Cliff Hog", "Trap: Nuclear Hog", "Trap: Johnny"],
+        "Nicholas Cage": ["Trap: Hatcher", "Trap: Elite Hatcher", "Trap: Not the Bees"],
+        "Fallout": ["Trap: Doggo with Nuke Nobelisk", "Trap: Nuclear Hog", "Trap: Nuclear Waste Drop", "Trap: Plutonium Waste Drop", "Bundle: Uranium", "Bundle: Uranium Fuel Rod", "Bundle: Uranium Waste", "Bundle: Plutonium Fuel Rod", "Bundle: Plutonium Waste", "Bundle: Ficsonium", "Bundle: Ficsonium Fuel Rod"],
+    }
+    # default="Normal" # TODO `default` doesn't do anything, default is always the first `choices` value. if uncommented it messes up the template file generation (caps mismatch)
+
+class TrapSelectionOverride(OptionSet):
+    """
+    Precise list of traps that may be in the item pool to find.
+    If you select anything with this option it will be used instead of the *Trap Presets* setting.
+    """
+    display_name = "Trap Override"
+    valid_keys = _trap_types
     default = {}
 
 class EnergyLink(Toggle):
@@ -322,7 +328,7 @@ class StartingInventoryPreset(ChoiceMap):
         "Foundations": _default_plus_foundations_starting_items,
         "Foundation Lover": _foundation_lover_starting_items
     }
-    default = "Archipelago" # TODO `default` doesn't do anything, default is always the first `choices` value
+    # default = "Archipelago" # TODO `default` doesn't do anything, default is always the first `choices` value. if uncommented it messes up the template file generation (caps mismatch)
 
 class GoalSelection(OptionSet):
     """
@@ -332,7 +338,7 @@ class GoalSelection(OptionSet):
     display_name = "Select your Goals"
     valid_keys = {
         "Space Elevator Tier",
-        "Resource Sink Points",
+        "AWESOME Sink Points",
         # "Exploration",
         # "FICSMAS Tree",
     }
