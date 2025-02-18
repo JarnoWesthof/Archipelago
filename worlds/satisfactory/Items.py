@@ -786,7 +786,7 @@ class Items:
             new_collected_parts: Set[str] = set()
 
             for part, recipe in pending_recipes_by_part.items():
-                if all(input in craftable_parts for input in recipe.inputs):
+                if not recipe.inputs or all(input in craftable_parts for input in recipe.inputs):
                     new_collected_parts.add(part)
 
             if not new_collected_parts:

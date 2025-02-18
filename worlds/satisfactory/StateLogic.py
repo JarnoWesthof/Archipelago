@@ -56,8 +56,9 @@ class StateLogic:
             recipes: List[Recipe] = logic.handcraftable_recipes[part]
 
             return any(
-                self.has_recipe(state, recipe) 
-                    and (not recipe.inputs or self.can_produce_all_allowing_handcrafting(state, logic, recipe.inputs))
+                self.has_recipe(state, recipe)
+                    and (self.options.experimental_generation or
+                        (not recipe.inputs or self.can_produce_all_allowing_handcrafting(state, logic, recipe.inputs)))
                 for recipe in recipes)
 
         return not parts or all(can_handcraft_part(part) for part in parts)
